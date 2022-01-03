@@ -1,0 +1,221 @@
+.lista-scroll {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    height: 450px;
+}
+.receipt {
+    width: 65%;
+    min-height: 80vh;
+    height: auto;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 5px 5px 15px #ccc;
+    padding: 15px;
+    font-size: 11pt;
+}
+
+.invoice {
+    position: relative;
+    background: #fff;
+    border: 1px solid #f4f4f4;
+    padding: 20px;
+    margin: 10px 25px;
+    width: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.print_section {
+    display: none;
+}
+@media print {
+
+    .print_section {
+        display: inline !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    #toast-container {
+        display: none;
+    }
+
+    .modal-backdrop.show {
+        opacity: 0;
+    }
+
+    * {
+        font-size: 11px;
+        font-family: 'Arial';
+        word-break: break-all;
+    }
+    /* nombre empresa */
+    .headings {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+
+    }
+    /* banca */
+    .sub-headings {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .slogan {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: lowercase;
+    }
+
+    .nota {
+        font-size: 9px;
+        font-weight: 400;
+    }
+
+
+    .border-top {
+        border-top: 1px solid #242424;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #242424;
+    }
+
+    .border-bottom-dotted {
+        border-bottom: 1px dotted darkgray;
+    }
+
+    .margin-bottom {
+        margin-bottom: 1em;
+    }
+
+    .centered {
+        text-align: center;
+        align-content: center;
+    }
+
+    .ticket {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    img {
+        display: block;
+        margin: auto;
+    }
+
+    .hidden-print,
+    .hidden-print * {
+        display: none !important;
+    }
+}
+
+.logo {
+    float: left;
+    padding: 10px;
+}
+
+
+/* nombre empresa */
+.headings {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+}
+
+.sub-headings {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.slogan {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: lowercase;
+}
+
+.copia {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: lowercase;
+}
+
+.nota {
+    font-size: 9px;
+    font-weight: 400;
+}
+
+
+
+.tickets {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.text-with-image {
+    float: left;
+    width: 65%;
+}
+
+.text-box {
+    width: 100%;
+    height: auto;
+}
+
+.f-right {
+    float: right;
+    width: 30%;
+
+}
+
+.f-left {
+    float: left;
+
+}
+
+.f-left-tic {
+    float: left;
+    width: 20%;
+
+}
+.f-right-pin {
+    float: right;
+    width: 15%;
+
+}
+.f-left-lot {
+    float: left;
+    width: 50%;
+}
+
+
+.textbox-info {
+    clear: both;
+}
+
+.textbox-info p {
+    margin-bottom: 0px
+}
+
+.flex-box {
+    display: flex;
+    width: 100%;
+}
+
+.flex-box p {
+    width: 50%;
+    margin-bottom: 1px;
+    white-space: nowrap;
+}
+
+.centered {
+    text-align: center;
+    align-content: center;
+}
