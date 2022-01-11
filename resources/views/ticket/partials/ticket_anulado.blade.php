@@ -1,5 +1,5 @@
-<div class="row gutters">
-    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+<div class="row gutters justify-content-center">
+    <div class="col-xl-5 col-lg-6 col-md-6 col-sm-6 col-12">
         <div class="containerTicket lista-scroll">
             <div class="invoice">
                 <div class="receipt" id="receipt_imagen">
@@ -187,75 +187,18 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-        {{-- RESULTADO --}}
-        <div class="card">
-            <div class="card-body ">
-                <h5 class="card-title border-success">Resultados</h5>
+    <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12">
 
-                <h3> <span class='badge badge-pill badge-primary m-1'>{{ $resultado->res_premio1 }} </span>
-                    <span class='badge badge-pill badge-secondary m-1'>{{ $resultado->res_premio2 }} </span>
-                    <span class='badge badge-pill badge-success m-1'>{{ $resultado->res_premio3 }} </span>
-                </h3>
+        <div class="form-group">
+            <input type="text" class="form-control" id="tic_pin" name="tic_pin" placeholder="Pin" required="">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="tia_detalle" placeholder="Motivo Para Anular Ticket" maxlength="140"
+                rows="4"></textarea>
+            <div class="form-text text-muted">
+                <p id="characterLeft" class="help-block">140 Caracteres Restantes</p>
             </div>
         </div>
-        {{-- @dump($jugadas) --}}
-        {{-- NUMEROS GANADORES Y EL VALOR --}}
-        <div class="card">
-            <div class="card-body ">
-                <h5 class="card-title border-success ">Numero Premiados</h5>
-                <div class="table-responsive">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th>Numero</th>
-                                <th>Apuesta</th>
-                                <th>Ganado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($jugadas as $jugada)
-                                <tr>
-                                    <td> {{ $jugada->tid_apuesta }} </td>
-                                    <td><span class="display_currency" data-orig-value='{{ $jugada->tid_valor }}'
-                                            data-currency_symbol=true>{{ $jugada->tid_valor }}</span> </td>
-                                    <td><span class="display_currency" data-orig-value='{{ $jugada->tid_ganado }}'
-                                            data-currency_symbol=true>{{ $jugada->tid_ganado }} </span></td>
 
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body ">
-
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        {{-- Total a Pagar --}}
-                        <h5 class="card-title">Total a Pagar:</h5>
-                        @php
-                            $total = 0;
-                        @endphp
-                        @foreach ($jugadas as $jugada)
-                            @php
-                                $total = $total + $jugada->tid_ganado;
-                            @endphp
-                        @endforeach
-                        <h3><span class="display_currency badge badge-pill badge-success m-1"
-                                data-orig-value='{{ $total }}'
-                                data-currency_symbol=true>{{ $total }}</span></h3>
-                        <input type="hidden" id="tic_ganado" name="tic_ganado" value="{{ $total }}">
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                        <div class="form-group">
-                            <h5 class="card-title">Pin:</h5>
-                            <input class="form-control" type="text" name="tic_pin" id="tic_pin" value="" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+</div>

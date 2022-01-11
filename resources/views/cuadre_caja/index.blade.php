@@ -133,7 +133,6 @@
                                             <th>Usuario</th>
                                             <th>Cantidad</th>
                                             <th>Motivo</th>
-                                            <th>Opciones</th>
                                         </tr>
                                     </thead>
                                 </table>

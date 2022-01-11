@@ -31,7 +31,7 @@
                 <span class="menu-text">Tickets</span>
             </a>
             
-            <a data-container=".view_register" href="#"  data-href="{{ route('getTicketLista') }}" class="btn-modal dropdown-item">
+            <a data-container=".view_register" href="#"  data-href="{{ route('getImpresora') }}" class="btn-modal dropdown-item">
                 <i class="icon-print"></i>
                 <span class="menu-text">Impresora Pos</span>
             </a>
@@ -44,9 +44,12 @@
     <div class="header-items">
         <!-- Header actions start -->
         <ul class="header-actions">
+            <li class="dropdown">         
+                <div class="print"> </div> 
+            </li>
             <li class="dropdown">
                 <span class="badge badge-primary badge-pill">Venta Total <div class="totalVentas"></div></span>
-            </li>
+            </li>  
             <li class="dropdown">
                 <a data-container=".view_register" href="#" data-href="{{ route('getTicketLista') }}" id="cuadreCaja" class="btn-modal">
                     <i class="icon-confirmation_number"></i>

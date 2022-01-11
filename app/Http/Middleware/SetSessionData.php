@@ -48,9 +48,10 @@ class SetSessionData
             
             $empresa_data = [
                 'date_format' => $empresa->emp_formato_fecha,
-                'time_zone ' => $empresa->emp_zona_horaria,
-                'logo ' => $empresa->emp_imagen,
-                'currency_symbol_placement ' => $empresa->emp_ubicacion_simbolo_moneda,
+                'time_zone' => $empresa->emp_zona_horaria,
+                'logo' => $empresa->emp_imagen,
+                'currency_symbol_placement' => $empresa->emp_ubicacion_simbolo_moneda,
+                'time_format' => $empresa->emp_formato_hora,
             ];
 
             $monedaBanca_data = [
@@ -74,6 +75,7 @@ class SetSessionData
                 'ban_url' => isset($banca->ban_url) ? $banca->ban_url : '',
                 'zonaHoraria' => $banca->ban_zonaHoraria,
                 'impresora' => $banca->ban_tipo_impresora,
+                'impresoraId' => $banca->impresoras_pos_id,
             ];
 
             $user_permisos = [

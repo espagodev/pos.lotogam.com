@@ -43,7 +43,7 @@ class TicketController extends Controller
                 //     }
 
                 // })
-                // ->editColumn('tic_fecha_sorteo', '{{@format_datetime($tic_fecha_sorteo)}}')
+                ->editColumn('tic_fecha_sorteo', '{{@format_datetime($tic_fecha_sorteo)}}')
                 ->editColumn('tic_apostado', function ($row) {
                     if ($row->tic_promocion == 1) {
                         $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
@@ -98,10 +98,10 @@ class TicketController extends Controller
 
                    
                     // if($row->anularCierre == 0){
-                    //     if (($isAnular == 0) && $row->tic_estado != 0) {
-                    //         $estado .= ' <button type="button" href="' . action('Ticket\TicketController@getAnularTicket', [$row->id]) . '" class="btn btn-sm btn-outline-danger anular_ticket_modal"
-                    //                     ><i class="fa fa-window-close"></i></button>';
-                    //     }
+                        if ($row->tic_estado != 0) {
+                            $estado .= ' <button type="button" data-href="' . route('getTicketAnulado', [$row->id]) . '" class="btn btn-sm btn-outline-danger btn-rounded btn-sm btn-modal"
+                            data-container=".view_register"><i class="icon-x-circle"></i></button>';
+                        }
                     // }
                   
                    
@@ -285,4 +285,43 @@ class TicketController extends Controller
             return $output;
         }
      }
+
+      /**
+     *  Ticket Anulado
+     */
+    public function getTicketAnulado(Request $request, $ticketId)
+    {
+        $data['bancas_id'] = !empty($request->bancas_id) ?  $request->bancas_id : session()->get('user.banca');
+        $data['users_id'] = !empty($request->users_id) ?  $request->users_id : session()->get('user.id');           
+        $data['empresas_id'] = session()->get('user.emp_id');
+        $data['printer_type'] =  !empty(session()->get('banca.impresora')) ? session()->get('banca.impresora') : 'browser';
+        $data['getImagen'] =   !empty($request->getImagen) ? $request->getImagen : 1;
+        $data['ticket'] =  $ticketId;
+
+        $ticket = $this->posService->getTicket($data);
+        
+        return view('ticket.modal_ticket_anulado')->with(compact('ticket','ticketId'));
+    }
+     
+    /**
+     *  Anular Ticket
+     */
+    public function getAnular(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data['bancas_id'] = !empty($request->bancas_id) ?  $request->bancas_id : session()->get('user.banca');
+            $data['users_id'] = !empty($request->users_id) ?  $request->users_id : session()->get('user.id');           
+            $data['empresas_id'] = session()->get('user.emp_id');            
+
+            $data['tickets_id'] = $request->get('tickets_id');
+            $data['pin'] = $request->get('pin');
+            $data['tia_detalle'] = $request->get('detalle');
+            
+            $data = $this->posService->getAnular($data);
+
+            return $data;
+
+        }
+    }
 }

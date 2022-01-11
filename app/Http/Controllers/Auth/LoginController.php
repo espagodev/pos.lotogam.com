@@ -85,7 +85,7 @@ class LoginController extends Controller
 
             $this->loginUser($user);
 
-            return redirect()->intended('home');
+            return redirect()->intended('pos');
         }
 
         return redirect()->route('login')->withErrors(['You caneceled the authorization process']);
@@ -122,7 +122,7 @@ class LoginController extends Controller
 
             $this->loginUser($user, $request->has('remember'));
 
-            return redirect()->intended('home');
+            return redirect()->intended('pos');
         } catch (ClientException $e) {
             $message = $e->getResponse()->getBody();
             if (Str::contains($message, 'invalid_credentials')) {

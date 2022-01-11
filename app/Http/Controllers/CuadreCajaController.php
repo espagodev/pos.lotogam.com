@@ -75,9 +75,7 @@ class CuadreCajaController extends Controller
                                        
               
                 })
-                // ->editColumn('cgc_fecha_movimiento', function ($row) {
-                //     return $this->util->format_date($row->cgc_fecha_movimiento, false);
-                // })
+                ->editColumn('cgc_fecha_movimiento', '{{@format_date($cgc_fecha_movimiento)}}')
 
                 ->rawColumns([ 'cgc_balance_inicial','cgc_total_entradas','cgc_total_salidas','cgc_total_venta','cgc_total_venta_neta','cgc_total_comisiones','cgc_total_premios','cgc_balance_final','cgc_fecha_movimiento','disponible'])
             ->make(true);
@@ -99,10 +97,9 @@ class CuadreCajaController extends Controller
             $listadoMovimientosDiarios  = $this->posService->getListadoMovimientosDiarios($data);
 
             return  DataTables::of($listadoMovimientosDiarios)
-     
-            ->editColumn('cag_fecha_movimiento', function ($row) {
-                // return $this->util->format_date($row->cag_fecha_movimiento, true);
-            })
+            
+            ->editColumn('cag_fecha_movimiento', '{{@format_date($cag_fecha_movimiento)}}')
+
             ->editColumn('bancas_id', function ($row) {
                 return  $row->ban_cod . ' - ' . $row->ban_nombre;
             })
@@ -113,16 +110,9 @@ class CuadreCajaController extends Controller
 
             return '<span class="display_currency" data-currency_symbol="true">' .
                 $row->cag_monto . '</span>';
+            })
 
-            })
-            ->addColumn('action', function ($row) {
-                
-                // if (session()->get('user.TipoUsuario') == 2) {
-                //     return '<button type="button" data-href="'.action('CajaGeneralController@getCajaGeneralDelete', [$row->id]) .'" class="btn btn-sm btn-danger delete_cajaGeneral_button"><i class="fa fa-trash" aria-hidden="true"></i></button>';
-                // } 
-               
-            })
-            ->rawColumns(['cag_fecha_movimiento', 'cag_monto', 'action'])
+            ->rawColumns(['cag_fecha_movimiento', 'cag_monto'])
         ->make(true);
 
         }

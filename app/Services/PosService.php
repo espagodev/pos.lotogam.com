@@ -135,6 +135,13 @@ class PosService
         return $this->makeRequest('get', "getvalidarLoteriaSeleccionada",$data);
     }
 
+    //VALIDAR JUGADAS AL MOMENTO DE SELECIONAR LOTERIAS
+    public function getvalidarLoteriaIndividual($data)
+    {
+        return $this->makeRequest('get', "getvalidarLoteriaIndividual",$data);
+    }
+
+
      //SALDO DISPONIBLE BARRA DE ESTADO
      public function getSaldoDisponible($data)
      {
@@ -196,6 +203,11 @@ class PosService
         return $this->makeRequest('GET', "getPagarPremio", $data);
     }
 
+    public function getAnular($data)
+    {
+        return $this->makeRequest('GET', "getAnular", $data);
+    }
+
     /**
      * LISTADO DE TRASLADO
      */
@@ -230,6 +242,22 @@ class PosService
     {
         return $this->makeRequest('GET', "getListadoResultados", $data);
     }
+    
+    /**
+     * VALIDA HORA CIERRE LOTERIA
+     */
+    public function getValidaHoraCierre($data)
+    {
+        return $this->makeRequest('GET', "getValidaHoraCierre", $data);
+    }
+
+    /**
+     * GUARDAR RESULTADOS
+     */
+    public function getGuardarResultados($data)
+    {
+        return $this->makeRequest('GET', "getGuardarResultados", $data);
+    }
 
      /**
      * REPORTES
@@ -255,5 +283,19 @@ class PosService
     public function getCuadreCajaDetalle($data)
     {
         return $this->makeRequest('GET', "getCuadreCajaDetalle", $data);
+    }
+
+    /**
+     * LISTADO DE IMPRESORAS
+     */
+
+    public function getImpresorasEmpresa($data)
+    {
+        return $this->makeRequest('GET', "getImpresorasEmpresa", $data);
+    }
+
+    public function getModificarImpresora($data)
+    {
+        return $this->makeRequest('GET', "getModificarImpresora", $data);
     }
 }

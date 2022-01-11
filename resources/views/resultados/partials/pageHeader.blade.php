@@ -7,12 +7,12 @@
 
     <ul class="app-actions chat-actions">
         <li>
-            <a href="#" >
+            <a href="#" data-href="">
                 <i class="icon-printer"></i>
             </a>
         </li>
         <li>
-            <a href="#" >
+            <a  href="#" data-href="{{ route('getNuevoResultado') }}" class="btn-modal nuevo-resultado">
                 <i class="icon-plus-square"></i>
             </a>
         </li>

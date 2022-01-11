@@ -58,4 +58,15 @@ class Util
             'cupo' => 'Apertura de Cupo'
         ];
     }
+
+    /**
+     * Retorna Tipo de Iempresora
+     */
+    public static function tipoImpresora()
+    {
+        return [
+            'printer' => 'Usar impresora de recibos configurada',
+            'browser' => 'Impresión basada en navegador'
+        ];
+    }
 }

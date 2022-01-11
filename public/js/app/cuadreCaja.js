@@ -201,12 +201,6 @@ $(document).ready(function () {
                 name: "cag_nota_movimiento",
                 orderable: false,
                 searchable: false
-            },
-            {
-                data: "action",
-                name: "action",
-                orderable: false,
-                searchable: false
             }
         ],
         fnDrawCallback: function(oSettings) {

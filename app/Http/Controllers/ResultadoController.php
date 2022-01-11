@@ -10,6 +10,7 @@ class ResultadoController extends Controller
     public function index()
     {       
         $data['empresas_id'] = session()->get('user.emp_id');
+        $data['lot_superpale'] = 0;
 
         $loterias = $this->posService->getLoterias($data);
         return view('resultados.index')->with(['loterias' => $loterias]);
@@ -35,10 +36,10 @@ class ResultadoController extends Controller
             ->editColumn('lot_nombre', function ($row) {
                 return $row->lot_nombre . ' (' . $row->lot_abreviado . ')';
             })
-            // ->editColumn('res_fecha', '{{@format_date($res_fecha)}}')
+            ->editColumn('res_fecha', '{{@format_date($res_fecha)}}')
             ->addColumn('action', function ($row) {
                 $action = '';
-                $action .= '<button data-href="" class="btn btn-sm btn-danger delete_resultado_button"><i class="fa fa-trash"></i></button>
+                $action .= '<button data-href="" class="btn btn-sm btn-outline-danger btn-rounded btn-sm delete_resultado_button"><i class="icon-x-circle"></i></button>
                 ';
                 return  $action;
             })
@@ -47,6 +48,46 @@ class ResultadoController extends Controller
             ->rawColumns(['loteria', 'res_fecha', 'action'])
             ->make(true);
 
+        }
+    }
+
+    public function getNuevoResultado()
+    {
+        $data['empresas_id'] = session()->get('user.emp_id');
+        $data['lot_superpale'] = 0;
+
+        $loterias = $this->posService->getLoterias($data);
+        return view('resultados.modal.modal_nuevo_resultado')->with(['loterias' => $loterias]);
+
+    }
+
+    public function getValidaHoraCierre(Request $request)
+    {
+       
+        if ($request->ajax()) {
+            $data['empresas_id'] =  session()->get('user.emp_id');
+            $data['loteriasId'] = $request->get('loteriasId');
+            $data['resFecha'] = $request->get('resFecha');
+            
+            $output =  $this->posService->getValidaHoraCierre($data);
+
+            return $output;
+        }
+    }
+
+    public function getGuardarResultados(Request $request)
+    {
+        if ($request->ajax()) {
+            $data['empresas_id'] =  session()->get('user.emp_id');
+            $data['loteriasId'] = $request->get('loteriasId');
+            $data['resFecha'] = $request->get('resFecha');
+            $data['res_premio1'] = $request->premio1;
+            $data['res_premio2'] = $request->premio2;
+            $data['res_premio3'] = $request->premio3;
+            
+            $output =  $this->posService->getGuardarResultados($data);
+
+            return $output;
         }
     }
 }

@@ -30,8 +30,8 @@ class ControlApuestasController extends Controller
                
             return DataTables::of($listadoCntrol)
 
-            // ->editColumn('cnj_fecha', '{{@format_date($cnj_fecha)}}')
-            // ->rawColumns(['cnj_fecha'])
+            ->editColumn('cnj_fecha', '{{@format_date($cnj_fecha)}}')
+            ->rawColumns(['cnj_fecha'])
             ->make(true);
         }
     }

@@ -208,7 +208,39 @@ $(document).ready(function () {
             });
         });
 
-        
+        //anular ticket
+    $(document).on('click', '.anularTicket', function(e) {
+
+        var tickets_id = $('#tickets_id').val();
+        var pin = $('#tic_pin').val();
+        var detalle = $('#tia_detalle').val();
+
+        $(this).prop("disabled", true);
+        $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+        );
+        var data = { tickets_id: tickets_id, pin: pin, detalle: detalle };
+
+            $.ajax({
+                method: 'GET',
+                url: $(this).data('href'),
+                
+                dataType: 'json',
+                data: data,
+                success: function(result) {
+                    if (result.success == true) {
+
+                            $('div.view_ticket_modal').modal('hide');
+                            $('div.view_register').modal('hide');
+                            toastr.success(result.msg);     
+
+                    } else {
+                        toastr.error(result.msg); 
+                    }
+                }
+            });
+    });
+    
 });
 
 //Configuración predeterminada para daterangePicker

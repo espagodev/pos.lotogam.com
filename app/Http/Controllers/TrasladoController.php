@@ -33,13 +33,13 @@ class TrasladoController extends Controller
             
             $listadoTraslado =  $this->posService->getListadoTraslado($data);
             return DataTables::of($listadoTraslado)
-            // ->editColumn('tln_fecha', '{{@format_date($tln_fecha)}}')
+            ->editColumn('tln_fecha', '{{@format_date($tln_fecha)}}')
 
             ->addColumn('contador', function ($row) {
                 return  '<input type="input" class="tln_contador_traslado input-small" id="tln_contador_traslado_'. $row->id .'" data-id="' . $row->id .'" value="' . $row->tln_contador_traslado .'">' ;
             })
 
-            ->rawColumns(['contador']) 
+            ->rawColumns(['contador','tln_fecha']) 
             ->make(true);
 
         }

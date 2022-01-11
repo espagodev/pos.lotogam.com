@@ -19,6 +19,7 @@ $(document).ready(function () {
 
     function initialize_printer() {
         if (__datos_tipo_impresora == 'printer') {
+            
             initializeSocket();
         }
     }
@@ -37,6 +38,32 @@ $(document).ready(function () {
     $("button#pos-cancel").click(function () {
         reset_pos_form();
     });
+
+        //VALIDA EL MONTO Y NUMERO PARA SER INGRESADOS
+
+    $("#tid_apuesta").keydown(function(event) {
+        if ($("input[name='lot_id[]']:checked").length >= 1) {
+            var bancas_id = $("input#bancas_id").val();
+            var users_id = $("input#users_id").val();
+            var loterias_id = $("input[name='lot_id[]']:checked")
+                .map(function() {
+                    return this.value;
+                })
+                .get();
+            var numero = $("input[name=tid_apuesta]").val();
+            var valor = $("input[name=tid_valor]").val();
+
+            __validarLoteriaSelecconada(
+                bancas_id,
+                users_id,
+                loterias_id,
+                numero,
+                valor
+            );
+        }
+    });
+
+    
 
     //crear jugada
     $("#tid_valor, #tid_apuesta").keydown(function (event) {
@@ -124,14 +151,14 @@ $(document).ready(function () {
                     },
                 })
             ).then(function (resp) {
-                if (resp.success == true) {
+                if (resp.status == "success") {
                     $("input[name=tid_apuesta]").val("");
                     $("input[name=tid_valor]").focus().val("");
                     MostrarJugadas();
-                    toastr.success(resp.msg);
+                    toastr.success(resp.message);
                 }
                 if (resp.status == "error") {
-                    toastr.error(resp.msg);
+                    toastr.error(resp.message);
                 }
             });
         });
@@ -142,7 +169,10 @@ $(document).ready(function () {
         //Compruebe si hay almenos una apuesta.
         if ($("table#pos_table tbody").find(".product_row").length <= 0) {
             toastr.warning("Agregue Algunas Jugadas Primero.");
+            $('.pos-generar').prop("disabled", false);
+            $('.pos-express-finalize').prop("disabled", false);
             return false;
+            
         }
     });
 
@@ -258,17 +288,6 @@ $(document).ready(function () {
                         horarioSuperPale();
                         __progressBar();
                         
-                        // if (__datos_tipo_impresora == 'printer') {
-                            
-                        //         receipt.forEach(function(elemento, index, arr) {
-                        //             if (arr[index]) {
-                        //                 __pos_print((arr[index] = elemento));
-                        //             }
-                        //         });                           
-                           
-                        // }else{
-                        //     __pos_print(receipt);
-                        // }
                         __pos_print(receipt);
                        
                         
@@ -333,7 +352,21 @@ $(document).ready(function () {
             });
     });
 
+   
 
+
+});
+
+//validar loterias seleccionadas
+$(document).on('click', '.validar_jugada_loteria', function(){
+
+    var loterias_id = $(this).attr("data-loterias_id");
+    var lot_superpale = $(this).attr("data-superpale");
+    
+    if ($("input#product_row_count").length > 0) {
+        __validarMontos(loterias_id,  lot_superpale ); 
+       }
+    
 });
 
 $(document).on("shown.bs.modal", "#generarModal", function() {});
@@ -463,7 +496,8 @@ function horarioSuperPale() {
     });
 }
 
-function validarLoteriaSelecconada(
+//valid cuando ya hya loterias seleccionadas
+function __validarLoteriaSelecconada(
     bancas_id,
     users_id,
     loterias_id,
@@ -498,8 +532,34 @@ function validarLoteriaSelecconada(
     });
 }
 
+//Valida loterias al momento de seleccionarlas
+function __validarMontos(loterias_id,  lot_superpale) {
 
+    $.when(
+        $.ajax({
 
+            type: "get",
+            url: '/pos/getvalidarLoteriaIndividual',
+            dataType: 'json',
+            data: {              
+                loterias_id: loterias_id,
+                lot_superpale: lot_superpale
+            },
+        })
+    ).then(function (result) {
+
+        if (result.status == 1) {
+            $("input[name=tid_valor]").focus().val("");
+            toastr.error(result.mensaje);
+        }
+        if (result.status == 2) {
+            $("input[name=tid_valor]").focus().val("");
+            toastr.error(result.mensaje);
+        }
+
+    });
+
+}
 
 //agrupado
 $(document).click(function() {

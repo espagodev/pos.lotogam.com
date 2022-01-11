@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('img/fav.png') }}" />
 
     <!-- Title -->
-    <title>Le Rouge Admin Template - Login</title>
+    <title>Lotogam Pos - Login</title>
 
     <!-- *************
    ************ Common Css Files *************
