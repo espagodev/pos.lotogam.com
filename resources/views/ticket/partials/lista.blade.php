@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table id="tickets"  class="table custom-table table-sm">
+    <table id="tickets_lista"  class="table custom-table table-sm">
         <thead>
             <tr>                
                 <th>Ticket</th>

@@ -4,26 +4,26 @@ $(document).ready(function () {
         $("#report_range").daterangepicker(dateRangeSettings, function(start,end) {
             $("#report_range span").val(start.format(moment_date_format) + " ~ " +  end.format(moment_date_format));
             
-            tickets.ajax.reload();
+            tickets_lista.ajax.reload();
             
         });
 
         $("#report_range").on("cancel.daterangepicker", function(ev,picker) {
             $("#report_range").val("");            
-            tickets.ajax.reload();
+            tickets_lista.ajax.reload();
 
         });
 
     }
 
-    $('#tickets,  #loterias_modal_id, #estado').change(
+    $('#tickets_lista,  #loterias_modal_id, #estado').change(
         function() {
-            tickets.ajax.reload();
+            tickets_lista.ajax.reload();
         }
     );
 
     //Reporte de tickets
-    tickets = $("#tickets").DataTable({
+    tickets_lista = $("#tickets_lista").DataTable({
         processing: true,
         serverSide: true,
         aaSorting: false,
@@ -86,7 +86,7 @@ $(document).ready(function () {
             { data: "action", name: "action" },
         ],
         fnDrawCallback: function (oSettings) {
-            __currency_convert_recursively($("#tickets"));
+            __currency_convert_recursively($("#tickets_lista"));
         },
     });
 });

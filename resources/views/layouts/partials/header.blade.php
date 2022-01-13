@@ -51,7 +51,7 @@
                 <span class="badge badge-primary badge-pill">Venta<div class="totalVentas"></div></span>
             </li>  
             <li class="dropdown">
-                <a data-container=".view_register" href="#" data-href="{{ route('getTicketLista') }}" id="tickets" class="btn-modal" data-toggle="tooltip" data-placement="bottom" title="Listado Tickets">
+                <a data-container=".view_register" href="#" data-href="{{ route('getTicketLista') }}" id="tickets" class="btn-modal" >
                     <i class="icon-confirmation_number"></i>
                 </a>                
             </li>

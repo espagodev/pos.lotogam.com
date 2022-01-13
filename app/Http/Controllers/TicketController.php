@@ -59,13 +59,7 @@ class TicketController extends Controller
                     }
                 })
                 ->addColumn('action', function ($row) {
-
-                    // if (session()->get('user.TipoUsuario') == 2) {
-                    //     $isAnular = 0;
-                    // } elseif (session()->get('user.TipoUsuario') == 3) {
-                    //     $isAnular = $row->isAnular;
-                    // }
-                   
+                  
 
                     $estado = '';
                     if($row->tic_agrupado != ''){
@@ -89,7 +83,7 @@ class TicketController extends Controller
                                 data-container=".view_register"><i class="icon-filter_none"></i></button>';
 
                    
-                    if($row->anularTicket = 0){
+                    if($row->anularTicket == 0){
                         if ($row->tic_estado != 0) {
                             $estado .= ' <button type="button" data-href="' . route('getTicketAnulado', [$row->id]) . '" class="btn btn-sm btn-outline-danger btn-rounded btn-sm btn-modal"
                             data-container=".view_register"><i class="icon-x-circle"></i></button>';
