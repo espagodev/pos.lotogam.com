@@ -111,7 +111,7 @@ class DashboardController extends Controller
             return  dataTables::of($reportePremiados)
             ->editColumn('loteria', '$loteria')
 
-            // ->editColumn('tic_fecha_sorteo', '{{@format_datetime($tic_fecha_sorteo)}}')
+            ->editColumn('tic_fecha_sorteo', '{{@format_date($tic_fecha_sorteo)}}')
             ->editColumn('tic_apostado', function ($row) {
                 if ($row->tic_promocion == 1) {
                     $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
@@ -131,11 +131,11 @@ class DashboardController extends Controller
                 $estado = '';
 
                 if($row->tic_estado == 2) {
-                    $estado .= '<button type="button" data-href=""  class="btn btn-outline-info btn-rounded btn-sm btn-modal"
-                                data-container=".view_register"><i class="icon-eye1"></i> </button>
+                            $estado .= '<button type="button" data-href="' . route('getVerTicket', [$row->id]) . '"  class="btn btn-outline-info btn-rounded btn-sm btn-modal"
+                            data-container=".view_register"><i class="icon-eye1"></i> </button>
 
-                            <button type="button" href=""  class="btn btn-outline-success btn-rounded btn-sm view_ticket_modal  no-print">
-                    <i class="icon-credit"></i> </button>';
+                            <button type="button" data-href="' . route('getTicketPremiado', [$row->id]) . '"  class="btn btn-outline-success btn-rounded btn-sm  btn-modal"
+                            data-container=".view_ticket_modal"> <i class="icon-local_atm"></i> </button>';
                
                 }
  

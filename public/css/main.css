@@ -362,7 +362,7 @@ h3.styled {
 
 @media (max-width: 768px) {
   .header {
-    margin: 0 0 .75rem 0;
+    margin: 0 0 .50rem 0;
     left: 0 !important; }
     /* .header .toggle-btns #pin-sidebar {
       display: none; } */
@@ -423,13 +423,13 @@ h3.styled {
   display: flex;
   align-items: center; }
   .header-actions > li > a {
-    padding: 1rem;
+    padding: .20rem;
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center; }
     .header-actions > li > a > i {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #01902d; }
     .header-actions > li > a .count-label {
       position: absolute;
@@ -477,11 +477,11 @@ h3.styled {
           .header-actions > li > a.user-settings .avatar .status.away {
             background: #e69f00; }
       .header-actions > li > a.user-settings span.user-name {
-        margin-right: 8px;
+        margin-right: 5px;
         vertical-align: middle;
-        font-size: .825rem;
+        font-size: .800rem;
         display: inline-block;
-        max-width: 90px;
+        max-width: 80px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis; }
@@ -494,12 +494,16 @@ h3.styled {
     display: block; }
 
 @media (max-width: 576px) {
-  .header-actions > li > a.user-settings span.user-name {
-    display: none; }
+  /* .header-actions > li > a.user-settings span.user-name {
+    display: none; 
+  }
   .header-actions > li:nth-child(2n) {
-    display: none; }
+    display: none;
+   }
   .header-actions > li:first-child {
-    display: none; } }
+    display: none;
+   } */
+   }
 ul.header-notifications li a {
   padding: .7rem 1rem;
   display: flex;
@@ -900,8 +904,10 @@ ul.header-tasks:last-child {
     border-right: 0; }
 
 @media (max-width: 576px) {
-  .app-actions {
-    display: none; } }
+  /* .app-actions {
+    display: none; 
+  } */
+ }
 /************************************************
 	************************************************
 										Components							

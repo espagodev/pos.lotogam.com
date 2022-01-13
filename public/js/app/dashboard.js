@@ -8,7 +8,6 @@ $(document).ready(function () {
                         " ~ " +
                         end.format(moment_date_format)
                 );
-
                 getResultadosFecha();
             }
         );
@@ -17,6 +16,20 @@ $(document).ready(function () {
             $("#reportrange").val("");
             getResultadosFecha();
         });
+    }
+
+    if ($("#lista_Resultados").length == 1) {
+        $("#lista_Resultados").daterangepicker(dateRangeSettings, function(start,end) {
+            $("#lista_Resultados").val(start.format(moment_date_format) + " ~ " +  end.format(moment_date_format));
+            tickets_premiados.ajax.reload();
+            
+        });
+
+        $("#lista_Resultados").on("cancel.daterangepicker", function(ev,picker) {
+            $("#lista_Resultados").val("");            
+            tickets_premiados.ajax.reload();
+        });
+
     }
 
     var start = $('input[name="date-filter"]:checked').data("start");
@@ -37,19 +50,26 @@ $(document).ready(function () {
         serverSide: true,
         aaSorting: false,
         searching: false,
+        responsive: true,
         ajax: {
             url: "/dashboard/getReporteTicketsPremiados",
             dataType: "json",
             data: function (d) {
                 d.bancas_id = $("select#bancas_id").val();
                 d.users_id = $("select#users_id").val();
-
-                var end = moment().format(moment_date_format);
-                var start = moment()
-                    .subtract(8, "days")
-                    .format(moment_date_format);
+                var start = '';
+                var end = '';
+                if ($('input#lista_Resultados').val()) {
+                    start = $('input#lista_Resultados')
+                        .data('daterangepicker')
+                        .startDate.format('YYYY-MM-DD');
+                    end = $('input#lista_Resultados')
+                        .data('daterangepicker')
+                        .endDate.format('YYYY-MM-DD');
+                }
                 d.start_date = start;
                 d.end_date = end;
+                
             },
         },
         columns: [

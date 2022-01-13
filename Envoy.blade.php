@@ -13,7 +13,7 @@
     //             Username: espagodev
     //             Password: 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';
     $origin = 'git@github.com:espagodev/pos.lotogam.com.git';
-    $branch = isset($branch) ? $branch : 'master';
+    $branch = isset($branch) ? $branch : 'main';
 
     $app_dir = '/var/www';
     $app_dir_pos = '/var/www/pos.lotogam.com';
@@ -36,6 +36,14 @@
     echo "hemos entrado al directorio /var/www";
    sudo git clone {{ $origin }};
     echo "repositorio clonado correctamente";
+@endtask
+
+@task('pull', ['on' => $on])
+    cd {{ $app_dir_pos }}
+    echo "hemos entrado al directorio {{ $app_dir_pos }}";
+    {{-- sudo git pull origin {{ $branch }} --allow-unrelated-histories --}}
+    sudo git pull origin {{ $branch }}
+    echo "código actualizado correctamente";
 @endtask
 
 @task('composer', ['on' => $on])

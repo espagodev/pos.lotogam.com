@@ -79,7 +79,8 @@ Route::middleware(['SetSessionData','auth'])->group(function () {
     Route::get('getNuevoResultado', [ResultadoController::class, 'getNuevoResultado'])->name('getNuevoResultado');
     Route::get('resultados/getValidaHoraCierre', [ResultadoController::class, 'getValidaHoraCierre'])->name('getValidaHoraCierre');
     Route::get('resultados/getGuardarResultados', [ResultadoController::class, 'getGuardarResultados'])->name('getGuardarResultados');
-
+    Route::get('resultados/getResultadosDelete/{resultado}', [ResultadoController::class, 'getResultadosDelete'])->name('getResultadosDelete');
+    
     /**
      * REPORTES
      */

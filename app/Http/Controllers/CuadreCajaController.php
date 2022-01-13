@@ -11,6 +11,7 @@ class CuadreCajaController extends Controller
     public function index()
     {     
         $data['empresas_id'] = session()->get('user.emp_id');
+        $data['lot_superpale'] = 0;
         
         $loterias = $this->posService->getLoterias($data);  
         $movimientosCaja = Util::movimientosCaja();

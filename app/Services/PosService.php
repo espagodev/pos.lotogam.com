@@ -259,6 +259,14 @@ class PosService
         return $this->makeRequest('GET', "getGuardarResultados", $data);
     }
 
+    /**
+     * eliminar resultados
+     */
+    public function getResultadosDelete($data)
+    {
+        return $this->makeRequest('GET', "getResultadosDelete", $data);
+    }
+
      /**
      * REPORTES
      */

@@ -134,7 +134,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <div class="row">
+                        <div class="row gutters">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 Resultados
                             </div>
@@ -176,8 +176,22 @@
         <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Ticket Premiados
-                       
+                    <div class="card-title">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                Ticket Premiados
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><i class="icon-calendar"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control"  name="date_range" id="lista_Resultados" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

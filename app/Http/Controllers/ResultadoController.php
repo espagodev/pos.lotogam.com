@@ -39,7 +39,7 @@ class ResultadoController extends Controller
             ->editColumn('res_fecha', '{{@format_date($res_fecha)}}')
             ->addColumn('action', function ($row) {
                 $action = '';
-                $action .= '<button data-href="" class="btn btn-sm btn-outline-danger btn-rounded btn-sm delete_resultado_button"><i class="icon-x-circle"></i></button>
+                $action .= '<button data-href="' . route('getResultadosDelete', [$row->id]) . '" class="btn btn-sm btn-outline-danger btn-rounded btn-sm delete_resultado_button"><i class="icon-x-circle"></i></button>
                 ';
                 return  $action;
             })
@@ -86,6 +86,19 @@ class ResultadoController extends Controller
             $data['res_premio3'] = $request->premio3;
             
             $output =  $this->posService->getGuardarResultados($data);
+
+            return $output;
+        }
+    }
+
+    public function getResultadosDelete($resultadoId)
+    {
+       
+        if (request()->ajax()) {
+            $data['empresaId'] =  session()->get('user.emp_id');
+            $data['resultadoId'] = $resultadoId;
+            
+            $output = $this->posService->getResultadosDelete($data);
 
             return $output;
         }

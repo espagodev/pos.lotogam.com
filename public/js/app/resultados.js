@@ -27,7 +27,6 @@ $(document).ready(function () {
     $(".guardarResultados").hide();
     $(".enproceso").hide();
 
-
     $("input[name=res_fecha]").change(function () {
         $(".loterias_id").show();
         $(".numerosPremiados").hide();
@@ -48,7 +47,6 @@ $(document).ready(function () {
                 $(".numerosPremiados").hide();
                 $(".guardarResultados").hide();
                 $(".enproceso").hide();
-
 
                 datepicker();
                 validar_loteria();
@@ -124,9 +122,37 @@ $(document).ready(function () {
     });
 });
 
+$(document).on("click", "button.delete_resultado_button", function () {
+    // swal({
+    //     title: "Estás seguro ?",
+    //     icon: "warning",
+    //     buttons: true,
+    //     dangerMode: true,
+    // }).then((willDelete) => {
+    //     if (willDelete) {
+            var href = $(this).data("href");
+            var data = $(this).serialize();
+
+            $.ajax({
+                method: "GET",
+                url: href,
+                dataType: "json",
+                data: data,
+                success: function (result) {
+                    if (result.status === true) {
+                        toastr.success(result.msg);
+                        listado_resultados.ajax.reload();
+                    } else {
+                        toastr.error(result.msg);
+                    }
+                },
+            });
+    //     }
+    // });
+});
+
 function validar_loteria() {
     $("#loterias_cierre_id").bind("change", function () {
-
         var loterias_id = $("#loterias_cierre_id").val();
         var res_fecha = $("#res_fecha").val();
 
@@ -139,7 +165,6 @@ function validar_loteria() {
                 data: {
                     loteriasId: loterias_id,
                     resFecha: res_fecha,
-                   
                 },
             })
         ).then(function (resp) {
@@ -162,62 +187,56 @@ function validar_loteria() {
 }
 
 function guardar_resultados() {
-
     $(".guardarResultados").click(function () {
+        $(".resultados").hide();
+        $(".numerosPremiados").hide();
+        $(".guardarResultados").hide();
+        $(".cancelar").hide();
+        $(".enproceso").show();
 
-    $(".resultados").hide();
-    $(".numerosPremiados").hide();
-    $(".guardarResultados").hide();
-    $(".cancelar").hide();
-    $(".enproceso").show();
-    
-    var container = $(".view_register");
-    
-    var loterias_id = $("#loterias_cierre_id").val();
-    var res_fecha = $("#res_fecha").val();
-    var premio1 = $('#res_premio1').val();
-    var premio2 = $('#res_premio2').val();
-    var premio3 = $('#res_premio3').val();
+        var container = $(".view_register");
 
-    var delayInMilliseconds = 2000; //1 second
-    setTimeout(function() {
-     $.when(
-         $.ajax({
-         async: false,
-            url: "/resultados/getGuardarResultados",
-            method: "get",
-            dataType: "json",
-            data: {
-                loteriasId: loterias_id,
-                resFecha: res_fecha,
-                'premio1': premio1,
-                'premio2': premio2,
-                'premio3': premio3,
+        var loterias_id = $("#loterias_cierre_id").val();
+        var res_fecha = $("#res_fecha").val();
+        var premio1 = $("#res_premio1").val();
+        var premio2 = $("#res_premio2").val();
+        var premio3 = $("#res_premio3").val();
 
-            }
-            })
-           ).then(function (resp) {
-            if (resp.status == true) {
-               
-                $("input[name=res_fecha]").val('');
-                $('#loterias_id').val('');
-                $('#res_premio1').val('');
-                $('#res_premio2').val('');
-                $('#res_premio3').val('');
-                $(".numerosPremiados").hide();
-                $(".guardarResultados").hide();
-                $(".loterias_id").hide();
-                $(".enproceso").hide();
-                
-                // $(".view_register").hide();
-                container.html(resp).modal("hide");
-                toastr.info(resp.msg);
-                listado_resultados.ajax.reload();
-                
-            }
-        });
-    }, delayInMilliseconds);
+        var delayInMilliseconds = 2000; //1 second
+        setTimeout(function () {
+            $.when(
+                $.ajax({
+                    async: false,
+                    url: "/resultados/getGuardarResultados",
+                    method: "get",
+                    dataType: "json",
+                    data: {
+                        loteriasId: loterias_id,
+                        resFecha: res_fecha,
+                        premio1: premio1,
+                        premio2: premio2,
+                        premio3: premio3,
+                    },
+                })
+            ).then(function (resp) {
+                if (resp.status == true) {
+                    $("input[name=res_fecha]").val("");
+                    $("#loterias_id").val("");
+                    $("#res_premio1").val("");
+                    $("#res_premio2").val("");
+                    $("#res_premio3").val("");
+                    $(".numerosPremiados").hide();
+                    $(".guardarResultados").hide();
+                    $(".loterias_id").hide();
+                    $(".enproceso").hide();
 
+                    // $(".view_register").hide();
+                    container.html(resp).modal("hide");
+                    toastr.info(resp.msg);
+                    listado_resultados.ajax.reload();
+                }
+            });
+        }, delayInMilliseconds);
     });
 }
 
@@ -239,10 +258,8 @@ function datepicker() {
     });
 }
 
-function fn_saltar(pre_premio,orden)
-{
-    if(orden == 1 && pre_premio.value.length == 2)
-        $("#res_premio2").focus();
-    else if(orden == 2 && pre_premio.value.length == 2)
+function fn_saltar(pre_premio, orden) {
+    if (orden == 1 && pre_premio.value.length == 2) $("#res_premio2").focus();
+    else if (orden == 2 && pre_premio.value.length == 2)
         $("#res_premio3").focus();
 }

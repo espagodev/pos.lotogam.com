@@ -13,6 +13,7 @@ class TicketController extends Controller
     public function getTicketLista()
     {
         $data['empresas_id'] = session()->get('user.emp_id');
+        $data['lot_superpale'] = 0;
 
         $loterias = $this->posService->getLoterias($data);
         $estadosTicket = Util::estadosTicket(); 
@@ -34,20 +35,11 @@ class TicketController extends Controller
                
             return dataTables::of($listadoTickets)
                 ->editColumn('loteria', '$loteria')
-                // ->editColumn('tic_ticket', function ($row) {
-                //     if($row->tic_agrupado != ''){
-                //         return  $row->tic_ticket . ' <i class="fa fa-object-group"></i>' ;
-                //     }
-                //     else{
-                //         return  $row->tic_ticket ;
-                //     }
-
-                // })
                 ->editColumn('tic_fecha_sorteo', '{{@format_datetime($tic_fecha_sorteo)}}')
                 ->editColumn('tic_apostado', function ($row) {
                     if ($row->tic_promocion == 1) {
                         $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
-                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . '</span><span class="badge badge-info m-1">** Promocion **</span>';
+                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . '</span><h5<span class="badge badge-info m-1">** Promocion **</span></h5>';
 
                     } else {
                         $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
@@ -97,12 +89,12 @@ class TicketController extends Controller
                                 data-container=".view_register"><i class="icon-filter_none"></i></button>';
 
                    
-                    // if($row->anularCierre == 0){
+                    if($row->anularTicket = 0){
                         if ($row->tic_estado != 0) {
                             $estado .= ' <button type="button" data-href="' . route('getTicketAnulado', [$row->id]) . '" class="btn btn-sm btn-outline-danger btn-rounded btn-sm btn-modal"
                             data-container=".view_register"><i class="icon-x-circle"></i></button>';
                         }
-                    // }
+                    }
                   
                    
                     return $estado;

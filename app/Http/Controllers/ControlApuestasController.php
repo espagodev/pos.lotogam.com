@@ -10,6 +10,7 @@ class ControlApuestasController extends Controller
     public function getControlApuestaLista()
     {
         $data['empresas_id'] = session()->get('user.emp_id');
+        $data['lot_superpale'] = 0;
         
         $loterias = $this->posService->getLoterias($data);  
         $modalidades = $this->posService->getModalidades(); 

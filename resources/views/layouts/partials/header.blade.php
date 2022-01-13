@@ -48,16 +48,16 @@
                 <div class="print"> </div> 
             </li>
             <li class="dropdown">
-                <span class="badge badge-primary badge-pill">Venta Total <div class="totalVentas"></div></span>
+                <span class="badge badge-primary badge-pill">Venta<div class="totalVentas"></div></span>
             </li>  
             <li class="dropdown">
-                <a data-container=".view_register" href="#" data-href="{{ route('getTicketLista') }}" id="cuadreCaja" class="btn-modal">
+                <a data-container=".view_register" href="#" data-href="{{ route('getTicketLista') }}" id="tickets" class="btn-modal" data-toggle="tooltip" data-placement="bottom" title="Listado Tickets">
                     <i class="icon-confirmation_number"></i>
                 </a>                
             </li>
             @if (session()->get('permisos.useCuadreCaja') == 1)
             <li class="dropdown">
-                <a href="{{ route('cuadreCaja') }}" id="cuadreCaja" >
+                <a href="{{ route('cuadreCaja') }}" id="cuadreCaja" data-toggle="tooltip" data-placement="bottom" title="Cuadre Caja">
                     <i class="icon-dollar-sign"></i>
                 </a>                
             </li>
@@ -65,25 +65,25 @@
            
              @if (session()->get('permisos.useTraslado') == 1)
             <li class="dropdown">
-                <a href="{{ route('traslado') }}" id="traslado" >
+                <a href="{{ route('traslado') }}" id="traslado" data-toggle="tooltip" data-placement="bottom" title="Traslado Numeros">
                     <i class="icon-swap_horiz"></i>
                 </a>                
             </li>
             @endif
             <li class="dropdown">
-                <a href="{{ route('pos') }}" id="notifications" >
+                <a href="{{ route('pos') }}" id="pos" data-toggle="tooltip" data-placement="bottom" title="Venta Pos">
                     <i class="icon-grid"></i>
                 </a>                
             </li>
             <li class="dropdown">
-                <a href="{{ route('dashboard') }}" id="notifications" >
+                <a href="{{ route('dashboard') }}" id="dashboard" data-toggle="tooltip" data-placement="bottom" title="dashboard">
                     <i class="icon-home2"></i>
                 </a>                
             </li>
            
             @if (session()->get('permisos.resultados') == 1)
             <li class="dropdown">
-                <a href="{{ route('resultados') }}" id="resultados" >
+                <a href="{{ route('resultados') }}" id="resultados" data-toggle="tooltip" data-placement="bottom" title="Resultados Loteria">
                     <i class="icon-gift"></i>
                 </a>                
             </li>
