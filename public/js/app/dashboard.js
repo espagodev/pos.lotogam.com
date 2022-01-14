@@ -18,6 +18,8 @@ $(document).ready(function () {
         });
     }
 
+    getResultadosFecha();
+    
     if ($("#lista_Resultados").length == 1) {
         $("#lista_Resultados").daterangepicker(dateRangeSettings, function(start,end) {
             $("#lista_Resultados").val(start.format(moment_date_format) + " ~ " +  end.format(moment_date_format));
