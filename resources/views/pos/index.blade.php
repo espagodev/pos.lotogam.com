@@ -47,7 +47,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">{{ $symbol }}</span>
                                             </div>
-                                            <input type="text" class="form-control" id="tid_valor" name="tid_valor"
+                                            <input type="number" class="form-control" id="tid_valor" name="tid_valor"
                                                 placeholder="Monto Apuesta" aria-label="Monto Apuesta"
                                                 aria-describedby="basic-addon1">
                                         </div>
@@ -60,7 +60,7 @@
                                                 <span class="input-group-text" id="basic-addon1"><i
                                                         class="icon-slack"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" name="tid_apuesta" id="tid_apuesta"
+                                            <input type="number" class="form-control" name="tid_apuesta" id="tid_apuesta"
                                                 placeholder="Numero" aria-label="Numero" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
