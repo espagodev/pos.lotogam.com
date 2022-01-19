@@ -69,4 +69,6 @@ class Util
             'browser' => 'Impresión basada en navegador'
         ];
     }
+
+
 }

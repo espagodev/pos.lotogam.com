@@ -126,6 +126,7 @@ class PosController extends Controller
 
     public function postGenerarTicket(Request $request)
     {
+        
         $data['bancas_id'] = !empty($request->bancas_id) ? $request->bancas_id : session()->get('user.banca');
         $data['users_id'] = !empty($request->users_id) ? $request->users_id : session()->get('user.id');
         $data['empresas_id'] = session()->get('user.emp_id');
@@ -135,15 +136,20 @@ class PosController extends Controller
         $data['loterias_id']  = $request->loterias_id;
         $data['printer_type'] =  !empty(session()->get('banca.impresora')) ? session()->get('banca.impresora') : 'browser';
         $data['getImagen'] =   !empty($request->getImagen) ? $request->getImagen : 0;
+        $data['totalTickets']  = !empty($request->totalTickets) ? $request->totalTickets : 0;
         $validarHoracierreLoteria = Horario::validarHoracierreLoteria($request->loterias_id);
-
         
+        $validarSaldoDisponible = $this->posService->getValidarSaldoDisponible($data);
+        if ($validarSaldoDisponible->status == 'error') {
+            return  $output = ['danger' , 'mensaje' => $validarSaldoDisponible->message];
+        }
+       
         if ($validarHoracierreLoteria) {
             return  $output = ['error' => 1, 'mensaje' => 'La Loteria no Esta Disponible Para Realizar Jugadas'];
         }
         
         $detalle_ticket = $this->posService->postNuevoTicket($data);
-        // dd($detalle_ticket);
+        
         $mensaje = 'Ticket Generado con éxito';
         
         if ($data['printer_type'] == 'printer' && $data['getImagen'] == 0) {         

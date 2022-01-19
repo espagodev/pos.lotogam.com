@@ -244,20 +244,37 @@ $(document).ready(function () {
     });
 
     pos_form_obj.validate({
-        submitHandler: function(form) {
-            // disable_pos_form_actions();
+        submitHandler: function(form) {         
+           
+            var price_total = 0;
+            var total_payable = 0;
+
+            $("table#pos_table tbody tr").each(function () {
+                price_total =
+                    price_total + __read_number($(this).find("input.pos_line_total"));
+            });
 
             var loterias = $("input[name='lot_id[]']:checked")
                 .map(function() {
                     return this.value;
                 })
                 .get();
+
             var product_row = $("input#product_row_count").val();
             var promocion = $("input[name='tic_promocion']:checked").val();
             var agrupado = $("input[name='tic_agrupado']:checked").val();
             var tic_fecha_sorteo = $("input#tic_fecha_sorteo").val();
             var token = $('meta[name="csrf-token"]').attr("content");
             var getImagen = 0;
+           
+            
+            if (loterias.length == 0) {
+                total_payable = 0;
+            } else {
+                total_payable = price_total * loterias.length;
+            }           
+            
+            var totalTickets = total_payable;
            
             var url = $(form).attr("action");
 
@@ -274,7 +291,8 @@ $(document).ready(function () {
                     tic_promocion: promocion,
                     tic_fecha_sorteo: tic_fecha_sorteo,
                     tic_agrupado: agrupado,
-                    getImagen: getImagen
+                    getImagen: getImagen,
+                    totalTickets: totalTickets
                 },
                 dataType: "json",
                 success: function(result) {
@@ -399,10 +417,10 @@ function reset_pos_form() {
 }
 
 function pos_total_ticket() {
-    var total_quantity = 0;
+
     var price_total = 0;
-    var contador = 0;
     var total_payable = 0;
+
 
     $("table#pos_table tbody tr").each(function () {
         price_total =
@@ -413,7 +431,7 @@ function pos_total_ticket() {
 
     $("input[name='lot_id[]']").on("click", function () {
         var checked = $("input[name='lot_id[]']:checked").length;
-
+       
         if (checked == 0) {
             total_payable = 0;
         } else {
@@ -423,8 +441,12 @@ function pos_total_ticket() {
         $("span#total_payable").text(
             __currency_trans_from_en(total_payable, true)
         );
+
         $("span#total_loterias").text(checked);
+       
     });
+
+    return total_payable;
 }
 
 //MOSTRAR JUGADAS

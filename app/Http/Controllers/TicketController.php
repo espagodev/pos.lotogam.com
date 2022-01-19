@@ -30,6 +30,7 @@ class TicketController extends Controller
             $data['users_id'] = !empty($request->users_id) ?  $request->users_id : session()->get('user.id');           
             $data['empresas_id'] = session()->get('user.emp_id');
             $data['loterias_id'] =  $request->get('loterias_id');
+            $data['horario'] = session()->get('user.userHorario');
     
             $listadoTickets =  $this->posService->getListadoTickets($data);
                
@@ -83,14 +84,13 @@ class TicketController extends Controller
                                 data-container=".view_register"><i class="icon-filter_none"></i></button>';
 
                    
-                    if($row->anularTicket == 0){
+                    if(($row->anularTicket == 0 && $row->horaCierre == 0 && $row->minutosCierre == 0 )){
                         if ($row->tic_estado != 0) {
                             $estado .= ' <button type="button" data-href="' . route('getTicketAnulado', [$row->id]) . '" class="btn btn-sm btn-outline-danger btn-rounded btn-sm btn-modal"
                             data-container=".view_register"><i class="icon-x-circle"></i></button>';
                         }
                     }
                   
-                   
                     return $estado;
                 })
 

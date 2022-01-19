@@ -8,7 +8,8 @@
             <div class="top-agents-container">
                 <div class="top-agent">                   
                     <div class="agent-details">
-                        <h6>Saldo Disponible <span  class="progres-estado"></span></h6>
+                        {{-- <h6>Saldo Disponible <span  class="progres-estado"></span></h6> --}}
+                        <h6>Saldo Disponible <span  class="total"></span> / <span  class="limite"></span></h6>
                         {{-- <div class="agent-score"> --}}
                         <div class="">
                             <div class="progress">

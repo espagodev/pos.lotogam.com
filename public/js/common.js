@@ -241,6 +241,25 @@ $(document).ready(function () {
             });
     });
     
+    // Textarea characters left
+    $(function() {
+        $('#characterLeft').text('140 Caracteres Restantes');
+        $('#tia_detalle').keydown(function () {
+            var max = 140;
+            var len = $(this).val().length;
+            if (len >= max) {
+                $('#characterLeft').text('Has alcanzado el limite');
+                $('#characterLeft').addClass('red');
+                $('#btnSubmit').addClass('disabled');            
+            } 
+            else {
+                var ch = max - len;
+                $('#characterLeft').text(ch + ' Caracteres Restantes');
+                $('#btnSubmit').removeClass('disabled');
+                $('#characterLeft').removeClass('red');            
+            }
+        });
+    });
 });
 
 //Configuración predeterminada para daterangePicker

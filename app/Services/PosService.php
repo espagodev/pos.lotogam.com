@@ -306,4 +306,14 @@ class PosService
     {
         return $this->makeRequest('GET', "getModificarImpresora", $data);
     }
+
+
+    /**
+     * valdiar saldo disponible
+     */
+    public function getValidarSaldoDisponible($data)
+    {
+        return $this->makeRequest('GET', "getValidarSaldoDisponible", $data);
+    }
+    
 }

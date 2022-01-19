@@ -173,12 +173,16 @@ function __progressBar() {
         dataType: "json",
         url: "/pos/getSaldoDisponible",
         success: function (response) {
+
             var percentage = response.percentage;
             var total = __currency_trans_from_en(response.total, true);
             var limite = __currency_trans_from_en(response.limite, true);
             var totalVenta = __currency_trans_from_en(response.venta, true);
             var estado = total + " / " + limite;
             var percentageNegativo = Math.sign(percentage);
+
+            $(".total").text(total);
+            $(".limite").text(limite);
 
             $(".totalVentas").text(totalVenta);
             $(".progres-estado").text(estado);
@@ -195,12 +199,12 @@ function __progressBar() {
                 $(".progress-bar").text(percentage + "%");
                 $(".progress-bar").attr("data-progress", percentage);              
 
-                if (percentage >= 1 && percentage <= 80) {
+                if (percentage >= '1.00' && percentage <= '80.99') {
                     $(".progress-bar").addClass("bg-success");
-                } else if (percentage >= 81 && percentage <= 99) {
+                } else if (percentage >= '81.00' && percentage <= '99.99') {
                     $(".progress-bar").addClass("bg-warning");
                     toastr.warning("Esta por Superar el Limite de Venta");
-                } else if (percentage >= 100) {
+                } else if (percentage >= '100.00') {
                     $(".progress-bar").addClass("bg-danger");
                     toastr.error(
                         "Limite de Venta Superado, Por Favor Comuniquese con el Administrador "
@@ -244,23 +248,5 @@ function __pos_print(receipt) {
     }
 }
 
-// Textarea characters left
-$(function() {
-	$('#characterLeft').text('140 Caracteres Restantes');
-	$('#tia_detalle').keydown(function () {
-		var max = 140;
-		var len = $(this).val().length;
-		if (len >= max) {
-			$('#characterLeft').text('Has alcanzado el limite');
-			$('#characterLeft').addClass('red');
-			$('#btnSubmit').addClass('disabled');            
-		} 
-		else {
-			var ch = max - len;
-			$('#characterLeft').text(ch + ' Caracteres Restantes');
-			$('#btnSubmit').removeClass('disabled');
-			$('#characterLeft').removeClass('red');            
-		}
-	});
-});
+
 

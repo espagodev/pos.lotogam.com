@@ -59,4 +59,18 @@ class Horario
 
        return false;
     }
+
+    /**
+     * calcula minutos para pos
+     */
+    static function calcularMinutosCierre($hora_cierre)
+    {
+        $created = new Carbon($hora_cierre);
+        $now = (new Carbon(date('H:i')))->tz('America/Santo_Domingo')->format('H:i');
+
+        $minutosFaltantes = $created->diffInMinutes($now);
+ 
+        return $minutosFaltantes;
+
+    }
 }
