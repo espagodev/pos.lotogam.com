@@ -137,6 +137,7 @@ class PosController extends Controller
         $data['printer_type'] =  !empty(session()->get('banca.impresora')) ? session()->get('banca.impresora') : 'browser';
         $data['getImagen'] =   !empty($request->getImagen) ? $request->getImagen : 0;
         $data['totalTickets']  = !empty($request->totalTickets) ? $request->totalTickets : 0;
+        
         $validarHoracierreLoteria = Horario::validarHoracierreLoteria($request->loterias_id);
         
         $validarSaldoDisponible = $this->posService->getValidarSaldoDisponible($data);

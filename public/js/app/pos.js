@@ -178,6 +178,21 @@ $(document).ready(function () {
 
     $("button.pos-generar").click(function() {
   
+        
+        var price_total = 0;
+        var total_payable = 0;
+
+        $("table#pos_table tbody tr").each(function () {
+            price_total =
+                price_total + __read_number($(this).find("input.pos_line_total"));
+        });
+
+        var loterias = $("input[name='lot_id[]']:checked")
+            .map(function() {
+                return this.value;
+            })
+            .get();
+
         var loterias = $("input[name='lot_id[]']:checked")
             .map(function() {
                 return this.value;
@@ -190,6 +205,15 @@ $(document).ready(function () {
         var token = $('meta[name="csrf-token"]').attr("content");
         var getImagen = 1;
 
+        
+        if (loterias.length == 0) {
+            total_payable = 0;
+        } else {
+            total_payable = price_total * loterias.length;
+        }           
+        
+        var totalTickets = total_payable;
+
         $.ajax({
             method: "get",
             url: $("#add_pos_sell_form").attr("action"),
@@ -201,7 +225,8 @@ $(document).ready(function () {
                 tic_promocion: promocion,
                 tic_fecha_sorteo: tic_fecha_sorteo,
                 tic_agrupado: agrupado,
-                getImagen: getImagen
+                getImagen: getImagen,
+                totalTickets: totalTickets
             },
             success: function(result) {
                 if (result.success == true) {
@@ -304,8 +329,7 @@ $(document).ready(function () {
                         reset_pos_form();
                         horarioLoteriasDia();
                         horarioSuperPale();
-                        __progressBar();
-                        
+                        __progressBar();                        
                         __pos_print(receipt);
                        
                         
