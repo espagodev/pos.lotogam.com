@@ -153,7 +153,7 @@ class PosController extends Controller
         $detalle_ticket = $this->posService->postNuevoTicket($data);
         
         if (!empty($detalle_ticket->status)) {
-              $output = ['error' => 1, 'mensaje' => $detalle_ticket->mensaje];
+          return    $output = ['error' => 1, 'mensaje' => $detalle_ticket->mensaje];
         }
 
        
