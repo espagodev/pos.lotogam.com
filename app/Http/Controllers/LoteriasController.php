@@ -42,14 +42,14 @@ class LoteriasController extends Controller
                                 $output .='<div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4"> 
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="' . $detalle->lot_nombre . '"  name="lot_id[]" value="' . $detalle->loterias_id . '|' . 0 . '|' . $detalle->hlo_hora_fin .' ">
-                                    <label class="custom-control-label validar_jugada_loteria" for="' . $detalle->lot_nombre . '" data-loterias_id="' . $detalle->loterias_id . '"  data-superpale="0"><span class="badge badge-success m-1 validar-monto"><h6 class="text-white">' . $detalle->lot_nombre .'</h6></span></label>
+                                    <label class="custom-control-label validar_jugada_loteria" for="' . $detalle->lot_nombre . '" data-loterias_id="' . $detalle->loterias_id . '"  data-superpale="0"><span class="badge badge-success m-1 validar_jugada_loteria"><h6 class="text-white">' . $detalle->lot_nombre .'</h6></span></label>
                                 </div>
                             </div>';
                             }else if($minutosCierre <= $detalle->hlo_minutos){
                                 $output .='<div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4"> 
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="' . $detalle->lot_nombre . '"  name="lot_id[]" value="' . $detalle->loterias_id . '|' . 0 . '|' . $detalle->hlo_hora_fin .' ">
-                                    <label class="custom-control-label validar_jugada_loteria" for="' . $detalle->lot_nombre . '" data-loterias_id="' . $detalle->loterias_id . '"  data-superpale="0"><span class="badge badge-warning m-1 validar-monto"><h6 class="text-white">' . $detalle->lot_nombre .'</h6></span></label>
+                                    <label class="custom-control-label validar_jugada_loteria" for="' . $detalle->lot_nombre . '" data-loterias_id="' . $detalle->loterias_id . '"  data-superpale="0"><span class="badge badge-warning m-1 validar_jugada_loteria"><h6 class="text-white">' . $detalle->lot_nombre .'</h6></span></label>
                                 </div>
                             </div>';
                             }
@@ -110,7 +110,7 @@ class LoteriasController extends Controller
                                 $output .='<div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="' . $detalle->lot_nombre . '"  name="lot_id[]" value="' . $detalle->loterias_id . '|' . $detalle->lot_superpale . '|' . $detalle->hlo_hora_fin .' ">
-                                        <label class="custom-control-label validar_jugada_loteria" for="' . $detalle->lot_nombre . '" data-loterias_id="' . $detalle->loterias_id . '"  data-superpale="' . $detalle->lot_superpale . '"><span class="badge badge-info m-1 "><h6 class="text-white">' . $detalle->lot_nombre .'</h6></span></label>
+                                        <label class="custom-control-label validar_jugada_loteria" for="' . $detalle->lot_nombre . '" data-loterias_id="' . $detalle->loterias_id . '"  data-superpale="' . $detalle->lot_superpale . '"><span class="badge badge-info m-1 validar_jugada_loteria"><h6 class="text-white">' . $detalle->lot_nombre .'</h6></span></label>
                                     </div>
                                 </div>';
                     } else {

@@ -39,7 +39,7 @@ $(document).ready(function () {
         reset_pos_form();
     });
 
-        //VALIDA EL MONTO Y NUMERO PARA SER INGRESADOS
+    //VALIDA EL MONTO Y NUMERO PARA SER INGRESADOS
 
     $("#tid_apuesta").keydown(function(event) {
         if ($("input[name='lot_id[]']:checked").length >= 1) {
@@ -99,9 +99,11 @@ $(document).ready(function () {
                 }
                 if (result.status == 1) {
                     $("input[name=tid_valor]").focus().val("");
+                    $("input[name=tid_apuesta]").val("");
                     toastr.error(result.mensaje);
                 }
                 if (result.status == 2) {
+                    
                     $("input[name=tid_valor]").focus().val("");
                     toastr.error(result.mensaje);
                 }
@@ -228,7 +230,9 @@ $(document).ready(function () {
                 getImagen: getImagen,
                 totalTickets: totalTickets
             },
+            
             success: function(result) {
+
                 if (result.success == true) {
 
                     var receipt = result.receipt.html_content;      
@@ -321,6 +325,7 @@ $(document).ready(function () {
                 },
                 dataType: "json",
                 success: function(result) {
+                   
                     var receipt = result.receipt;
                        
                     if (result.success == 1) {
@@ -404,8 +409,9 @@ $(document).on('click', '.validar_jugada_loteria', function(){
 
     var loterias_id = $(this).attr("data-loterias_id");
     var lot_superpale = $(this).attr("data-superpale");
-    
-    if ($("input#product_row_count").length > 0) {
+    var product_row = $("input#product_row_count").val()
+
+    if (product_row >= 1) {
         __validarMontos(loterias_id,  lot_superpale ); 
        }
     
@@ -542,7 +548,7 @@ function horarioSuperPale() {
     });
 }
 
-//valid cuando ya hya loterias seleccionadas
+//valid cuando ya hay loterias seleccionadas
 function __validarLoteriaSelecconada(
     bancas_id,
     users_id,
@@ -571,6 +577,7 @@ function __validarLoteriaSelecconada(
         }
         if (result.status == 2) {
             $("input[name=tid_valor]").focus().val("");
+            $("input[name=tid_apuesta]").val("");
             toastr.error(result.mensaje);
         }
 
@@ -600,6 +607,7 @@ function __validarMontos(loterias_id,  lot_superpale) {
         }
         if (result.status == 2) {
             $("input[name=tid_valor]").focus().val("");
+            $("input[name=tid_apuesta]").val("");
             toastr.error(result.mensaje);
         }
 

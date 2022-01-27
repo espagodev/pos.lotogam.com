@@ -141,8 +141,9 @@ class PosController extends Controller
         $validarHoracierreLoteria = Horario::validarHoracierreLoteria($request->loterias_id);
         
         $validarSaldoDisponible = $this->posService->getValidarSaldoDisponible($data);
+
         if ($validarSaldoDisponible->status == 'error') {
-            return  $output = ['danger' , 'mensaje' => $validarSaldoDisponible->message];
+            return  $output = ['error' => 1, 'mensaje' => $validarSaldoDisponible->message];
         }
        
         if ($validarHoracierreLoteria) {
@@ -151,6 +152,11 @@ class PosController extends Controller
         
         $detalle_ticket = $this->posService->postNuevoTicket($data);
         
+        if (!empty($detalle_ticket->status)) {
+              $output = ['error' => 1, 'mensaje' => $detalle_ticket->mensaje];
+        }
+
+       
         $mensaje = 'Ticket Generado con éxito';
         
         if ($data['printer_type'] == 'printer' && $data['getImagen'] == 0) {         
