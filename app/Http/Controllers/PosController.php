@@ -90,8 +90,8 @@ class PosController extends Controller
             $data['bancas_id'] = !empty($request->bancas_id) ? $request->bancas_id : session()->get('user.banca');
             $data['users_id'] = !empty($request->users_id) ? $request->users_id : session()->get('user.id');
             $data['empresas_id'] = session()->get('user.emp_id');
-            $data['loterias_id']  = $request->loterias_id;
-            $data['lot_superpale']  = $request->lot_superpale;
+            $data['loterias_id']  = $request->loteriaId;
+            $data['lot_superpale']  = $request->lotSuperpale;
 
             
             $detalleTemporales = $this->posService->getvalidarLoteriaIndividual($data);           

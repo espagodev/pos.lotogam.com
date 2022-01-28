@@ -411,8 +411,30 @@ $(document).on('click', '.validar_jugada_loteria', function(){
     var lot_superpale = $(this).attr("data-superpale");
     var product_row = $("input#product_row_count").val()
 
+
     if (product_row >= 1) {
-        __validarMontos(loterias_id,  lot_superpale ); 
+        // __validarMontos(loterias_id,  lot_superpale ); 
+        $.ajax({
+            type: "get",
+            url: '/pos/getvalidarLoteriaIndividual',
+            dataType: 'json',
+            data: {              
+                loteriaId: loterias_id,
+                lotSuperpale: lot_superpale
+            },
+            success: function (result) {
+               
+            if (result.status == 1) {
+                $("input[name=tid_valor]").focus().val("");
+                toastr.error(result.mensaje);
+            }
+            if (result.status == 2) {
+                $("input[name=tid_valor]").focus().val("");
+                $("input[name=tid_apuesta]").val("");
+                toastr.error(result.mensaje);
+            }
+            },
+        });
        }
     
 });
@@ -588,19 +610,17 @@ function __validarLoteriaSelecconada(
 //Valida loterias al momento de seleccionarlas
 function __validarMontos(loterias_id,  lot_superpale) {
 
-    $.when(
-        $.ajax({
 
-            type: "get",
-            url: '/pos/getvalidarLoteriaIndividual',
-            dataType: 'json',
-            data: {              
-                loterias_id: loterias_id,
-                lot_superpale: lot_superpale
-            },
-        })
-    ).then(function (result) {
-
+    $.ajax({
+        type: "get",
+        url: '/pos/getvalidarLoteriaIndividual',
+        dataType: 'json',
+        data: {              
+            loteriaId: loterias_id,
+            lotSuperpale: lot_superpale
+        },
+        success: function (result) {
+           
         if (result.status == 1) {
             $("input[name=tid_valor]").focus().val("");
             toastr.error(result.mensaje);
@@ -610,8 +630,33 @@ function __validarMontos(loterias_id,  lot_superpale) {
             $("input[name=tid_apuesta]").val("");
             toastr.error(result.mensaje);
         }
-
+        },
     });
+ 
+    //     $.ajax({
+
+    //         type: "get",
+    //         url: '/pos/getvalidarLoteriaIndividual',
+    //         dataType: 'json',
+    //         data: {              
+    //             loteriaId: loterias_id,
+    //             lotSuperpale: lot_superpale
+    //         },
+    //     })
+    //     success: function (result) {
+    // ).then(function (result) {
+
+    //     if (result.status == 1) {
+    //         $("input[name=tid_valor]").focus().val("");
+    //         toastr.error(result.mensaje);
+    //     }
+    //     if (result.status == 2) {
+    //         $("input[name=tid_valor]").focus().val("");
+    //         $("input[name=tid_apuesta]").val("");
+    //         toastr.error(result.mensaje);
+    //     }
+
+    // });
 
 }
 
