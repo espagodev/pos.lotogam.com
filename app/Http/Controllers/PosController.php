@@ -126,7 +126,7 @@ class PosController extends Controller
 
     public function postGenerarTicket(Request $request)
     {
-        
+        $data['totalJugadas']  = !empty($request->product_row) ? $request->product_row : 0;
         $data['bancas_id'] = !empty($request->bancas_id) ? $request->bancas_id : session()->get('user.banca');
         $data['users_id'] = !empty($request->users_id) ? $request->users_id : session()->get('user.id');
         $data['empresas_id'] = session()->get('user.emp_id');
@@ -151,28 +151,32 @@ class PosController extends Controller
         }
         
         $detalle_ticket = $this->posService->postNuevoTicket($data);
-        
+        // dd($detalle_ticket);
         if (!empty($detalle_ticket->status)) {
           return    $output = ['error' => 1, 'mensaje' => $detalle_ticket->mensaje];
         }
 
-       
+
+     
         $mensaje = 'Ticket Generado con éxito';
         
         if ($data['printer_type'] == 'printer' && $data['getImagen'] == 0) {         
             $output = ['success' => 1, 'mensaje' => $mensaje, 'receipt' => $detalle_ticket];
-        } else {   
+        } else {
 
             if($data['tic_agrupado'] == 1){
-                $layout = 'pos.receipts.formatoAgrupado58';  
-            }else{
+                $layout = 'pos.receipts.formatoAgrupado58';              
+                $receipt['html_content'] = view($layout, compact('detalle_ticket'))->render();
+            }
+            else{
                 $layout = 'pos.receipts.formato58';  
+                $receipt['html_content'] = view($layout, compact('detalle_ticket'))->render(); 
             }           
          
-            $receipt['html_content'] = view($layout, compact('detalle_ticket'))->render();  
+           
             $output = ['success' => 1, 'mensaje' => $mensaje, 'receipt' => $receipt];
         }
-
+ 
         return $output;
     }
 

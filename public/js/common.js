@@ -208,7 +208,7 @@ $(document).ready(function () {
             });
         });
 
-        //anular ticket
+    //anular ticket
     $(document).on('click', '.anularTicket', function(e) {
 
         var tickets_id = $('#tickets_id').val();
@@ -231,7 +231,7 @@ $(document).ready(function () {
                     if (result.success == true) {
 
                             $('div.view_ticket_modal').modal('hide');
-                            $('div.view_register').modal('hide');
+                            // $('div.view_register').modal('hide');
                             toastr.success(result.msg);     
 
                     } else {

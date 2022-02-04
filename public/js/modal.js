@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $(".view_register").on("shown.bs.modal", function () {
+    // $(".view_register").on("shown.bs.modal", function () {
        
-    });
+    // });
 
     $(document).on("click", ".btn-modal", function (e) {
         e.preventDefault();
@@ -15,6 +15,7 @@ $(document).ready(function () {
         });
     });
 });
+
 
 
 $(document).on('click', '.view_ticket_modal', function(e) {

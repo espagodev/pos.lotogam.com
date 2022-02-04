@@ -390,7 +390,7 @@ $(document).ready(function () {
                 success: function(result) {
                      if (result.success === true) {
                             $('div.view_ticket_modal').modal('hide');
-                            $('div.view_register').modal('hide');
+                            // $('div.view_register').modal('hide');
                             toastr.success(result.msg);                           
                         } else {
                             toastr.error(result.msg);                            

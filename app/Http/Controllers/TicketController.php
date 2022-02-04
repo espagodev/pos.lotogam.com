@@ -25,13 +25,14 @@ class TicketController extends Controller
         if ($request->ajax()) {
             
             
-            $data =  $request->only(['start_date', 'end_date', 'estado', 'promocion',]);
+            $data =  $request->only(['start_date', 'end_date', 'estado', 'promocion', 'ticket']);
             $data['bancas_id'] = !empty($request->bancas_id) ?  $request->bancas_id : session()->get('user.banca');
             $data['users_id'] = !empty($request->users_id) ?  $request->users_id : session()->get('user.id');           
             $data['empresas_id'] = session()->get('user.emp_id');
             $data['loterias_id'] =  $request->get('loterias_id');
             $data['horario'] = session()->get('user.userHorario');
-    
+            $data['ticket'] =  $request->get('ticket');
+            
             $listadoTickets =  $this->posService->getListadoTickets($data);
                
             return dataTables::of($listadoTickets)
@@ -65,10 +66,10 @@ class TicketController extends Controller
                     $estado = '';
                     if($row->tic_agrupado != ''){
                         $estado .= '<button type="button"  data-href="' . route('getVerTicketAgrupado', [$row->tic_agrupado]) . '"  class="btn btn-outline-success btn-rounded btn-sm btn-modal"
-                                    data-container=".view_register"><i class="icon-documents"></i> </button> ';
+                                    data-container=".view_ticket_modal"><i class="icon-documents"></i> </button> ';
                     }
                     $estado .= '<button type="button" data-href="' . route('getVerTicket', [$row->id]) . '"  class="btn btn-outline-info btn-rounded btn-sm btn-modal"
-                                    data-container=".view_register"><i class="icon-eye1"></i> </button>
+                                    data-container=".view_ticket_modal"><i class="icon-eye1"></i> </button>
 
                                      <a href="#" data-href="' . route('getImprimirTicket', [$row->id]) . '"  class="btn btn-outline-warning btn-rounded btn-sm print-invoice"
                                     ><i class="icon-printer"></i></a>';
@@ -77,17 +78,17 @@ class TicketController extends Controller
                                     data-container=".view_ticket_modal"> <i class="icon-local_atm"></i> </button>';
                     } else if ($row->tic_estado == 3) {
                         $estado .= '<button type="button" data-href="' . route('getVerTicket', [$row->id]) . '"  class="btn btn-outline-info btn-rounded btn-sm btn-modal"
-                                    data-container=".view_register"><i class="icon-eye1"></i> </button>';                    
+                                    data-container=".view_ticket_modal"><i class="icon-eye1"></i> </button>';                    
                     }
 
                     $estado .= ' <button type="button" data-href="' . route('getVerDuplicarTicket', [$row->id]) . '"  class="btn btn-outline-secondary btn-rounded btn-sm btn-modal"
-                                data-container=".view_register"><i class="icon-filter_none"></i></button>';
+                                data-container=".view_ticket_modal"><i class="icon-filter_none"></i></button>';
 
                    
                     if(($row->anularTicket == 0 && $row->horaCierre == 0 && $row->minutosCierre == 0 )){
                         if ($row->tic_estado != 0) {
                             $estado .= ' <button type="button" data-href="' . route('getTicketAnulado', [$row->id]) . '" class="btn btn-sm btn-outline-danger btn-rounded btn-sm btn-modal"
-                            data-container=".view_register"><i class="icon-x-circle"></i></button>';
+                            data-container=".view_ticket_modal"><i class="icon-x-circle"></i></button>';
                         }
                     }
                   

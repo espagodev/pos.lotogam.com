@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     }
 
-    $('#tickets_lista,  #loterias_modal_id, #estado').change(
+    $('#tickets_lista,  #loterias_modal_id, #estado, #ticket').change(
         function() {
             tickets_lista.ajax.reload();
         }
@@ -27,7 +27,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         aaSorting: false,
-        searching: false,
+        searching: true,
         ajax: {
             url: "/ticket/getListadoTickets",
             dataType: "json",
@@ -37,6 +37,7 @@ $(document).ready(function () {
                 d.estado = $("select#estado").val();
                 d.promocion = $("select#promocion").val();
                 d.users_id = $("select#users_id").val();
+                d.ticket = $("input#ticket").val();
 
                 var start = "";
                 var end = "";
@@ -57,7 +58,7 @@ $(document).ready(function () {
                 data: "tic_ticket",
                 name: "tic_ticket",
                 orderable: false,
-                searchable: true,
+                searchable: false,
             },
             {
                 data: "lot_nombre",
