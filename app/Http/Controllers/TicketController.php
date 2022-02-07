@@ -82,7 +82,7 @@ class TicketController extends Controller
                     }
 
                     $estado .= ' <button type="button" data-href="' . route('getVerDuplicarTicket', [$row->id]) . '"  class="btn btn-outline-secondary btn-rounded btn-sm btn-modal"
-                                data-container=".view_ticket_modal"><i class="icon-filter_none"></i></button>';
+                                data-container=".view_register"><i class="icon-filter_none"></i></button>';
 
                    
                     if(($row->anularTicket == 0 && $row->horaCierre == 0 && $row->minutosCierre == 0 )){

@@ -196,7 +196,7 @@ class PosController extends Controller
         $data['bancas_id'] = session()->get('user.banca');
         $data['users_id'] = session()->get('user.id');
         $data['ticket'] = $ticket;
-
+        
         $output = $this->posService->getDuplicarTicket($data);       
        
         return redirect()->to('pos');

@@ -3,6 +3,8 @@
 {{-- envoy run git:clone --on=aws --}}
 {{-- envoy run git:pull --on=aws --}}
 {{-- envoy run pull --on=lot --}}
+{{-- php vendor/bin/envoy run pull --on=lot --}}
+
 @include('vendor/autoload.php')
 
 
@@ -24,12 +26,9 @@
     }
 @endsetup
 
-
-@story('app:deploy', ['on' => $on])
-  
-@endstory
-
-
+@task('test')
+    echo "Prueba Envoy";
+@endtask
 
 @task('git:clone', ['on' => $on])
     cd {{ $app_dir }}
