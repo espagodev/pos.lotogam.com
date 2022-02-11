@@ -22,28 +22,44 @@ class PosController extends Controller
         $data['bancas_id'] = !empty($request->bancas_id) ? $request->bancas_id : session()->get('user.banca');
         $data['users_id'] = !empty($request->users_id) ? $request->users_id : session()->get('user.id');
         $data['empresas_id'] = session()->get('user.emp_id');
-        $data['tid_apuesta'] =  $request->tid_apuesta ;
+        $data['tid_apuesta'] =  $request->tid_apuesta;
         $data['tid_valor'] =  $request->tid_valor;
         $data['loterias_id']  = $request->loterias_id;
-       
-        
-        $jugada =  $this->posService->postApuestaTemporal($data);
+        $data['totalQuinielas']  = !empty($request->row_count_quiniela) ? $request->row_count_quiniela : 0;
 
-        return $jugada;
+        // dd($data['totalQuinielas'] , session()->get('permisos.useLimiteNumeros'), $data['tid_apuesta']);
+        // if(session()->get('permisos.usePermiteLimite') == 1){
+        //     if(strlen($request->tid_apuesta) == '2'){
+        //         if ($data['totalQuinielas'] >= session()->get('permisos.useLimiteNumeros') ) {
+        //             return  $output = ['status' => 1, 'mensaje' => 'Superal limite de Jugadas Permitidas en Quiniela ss'];
+        //         }
+        //     }
+           
+        // }      
+ 
+        $output =  $this->posService->postApuestaTemporal($data);
+
+        return $output;
     }
 
     public function getApuestaTemporal(Request $request)
     {
         if ($request->ajax()) {
             $row_count = request()->get('product_row');
+            $row_count_quiniela = request()->get('row_count_quiniela');
             $data['bancas_id'] = !empty($request->bancas_id) ? $request->bancas_id : session()->get('user.banca');
             $data['users_id'] = !empty($request->users_id) ? $request->users_id : session()->get('user.id');
 
             $detalleTemporales = $this->posService->getApuestaTemporal($data);
-
+  
             $ticketDetalles = '';
             $datos[] = '';
             foreach ($detalleTemporales as  $detalle) {
+
+                if($detalle->modalidades_id == '1'){
+                    $row_count_quiniela = $row_count_quiniela + 1;
+                }
+                
                 $row_count = $row_count + 1;
                 $ticketDetalles .= '<tr class="product_row" >' .
                     '<td>' . $detalle->mod_nombre . '</td>' .
@@ -57,7 +73,8 @@ class PosController extends Controller
                     </td>' .
                     '</tr>';
             }
-            $datos = ['ticketDetalles' => $ticketDetalles, 'row_count' => $row_count];
+            $datos = ['ticketDetalles' => $ticketDetalles, 'row_count' => $row_count, 'row_count_quiniela' => $row_count_quiniela];
+            
             return  $datos;
         }
     }
@@ -74,7 +91,8 @@ class PosController extends Controller
             $data['tid_apuesta'] =  $request->tid_apuesta ;
             $data['tid_valor'] =  $request->tid_valor;
             $data['loterias_id']  = $request->loterias_id;
-            
+            $data['totalQuinielas']  = !empty($request->count_quiniela) ? $request->count_quiniela : 0;
+
             $detalleTemporales = $this->posService->getvalidarLoteriaSeleccionada($data);           
 
             return $detalleTemporales;
@@ -92,7 +110,7 @@ class PosController extends Controller
             $data['empresas_id'] = session()->get('user.emp_id');
             $data['loterias_id']  = $request->loteriaId;
             $data['lot_superpale']  = $request->lotSuperpale;
-
+            $data['totalQuinielas']  = !empty($request->count_quiniela) ? $request->count_quiniela : 0;
             
             $detalleTemporales = $this->posService->getvalidarLoteriaIndividual($data);           
 
@@ -137,6 +155,9 @@ class PosController extends Controller
         $data['printer_type'] =  !empty(session()->get('banca.impresora')) ? session()->get('banca.impresora') : 'browser';
         $data['getImagen'] =   !empty($request->getImagen) ? $request->getImagen : 0;
         $data['totalTickets']  = !empty($request->totalTickets) ? $request->totalTickets : 0;
+        $data['usePermiteLimite']  = !empty(session()->get('permisos.usePermiteLimite')) ? session()->get('permisos.usePermiteLimite') : 0;
+        $data['useLimiteNumeros']  = !empty(session()->get('permisos.useLimiteNumeros')) ? session()->get('permisos.useLimiteNumeros') : 0;       
+        $data['totalQuiniela']  = !empty($request->row_count_quiniela) ? $request->row_count_quiniela : 0;
         
         $validarHoracierreLoteria = Horario::validarHoracierreLoteria($request->loterias_id);
         
@@ -150,8 +171,9 @@ class PosController extends Controller
             return  $output = ['error' => 1, 'mensaje' => 'La Loteria no Esta Disponible Para Realizar Jugadas'];
         }
         
+        
         $detalle_ticket = $this->posService->postNuevoTicket($data);
-        // dd($detalle_ticket);
+  
         if (!empty($detalle_ticket->status)) {
           return    $output = ['error' => 1, 'mensaje' => $detalle_ticket->mensaje];
         }

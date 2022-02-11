@@ -70,6 +70,8 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="table-responsive">
                                         <input type="hidden" id="product_row_count" value="0">
+                                        <input type="hidden" id="quiniela_row_count" value="0">
+                                        
                                         <table class="table table-sm" id="pos_table">
                                             <thead>
                                                 <tr>
@@ -135,17 +137,10 @@
                     </div>
                 </div>
                 @endif
-            </div>
-
-        </div>
-        <!-- Row ends -->
-        <!-- Row starts -->
-        <div class="row gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="row gutters no-print">
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                            {{-- <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                                 <button type="button"
                                     class="btn btn-info btn-sm no-print btn-block waves-effect waves-light m-1"
                                     disabled>Borrador</button>
@@ -154,33 +149,37 @@
                                 <button type="button"
                                     class="btn btn-warning btn-sm no-print btn-block waves-effect waves-light m-1 "
                                     disabled><i class="fa fa-pause"></i> Suspender</button>
-                            </div>
+                            </div> --}}
                             @if (session()->get('permisos.useTicketImagen') == 1)
-                                <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                     <button type="button"
-                                        class="btn btn-info btn-sm no-print btn-block pos-express-btn pos-generar pos-validar pull-right"><i
+                                        class="btn btn-info btn-sm no-print btn-block pos-express-btn pos-generar pos-validar "><i
                                             class="icon-image"></i> Generar Imagen</button>
                                 </div>
                             @endif
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                 <button type="button"
-                                    class="btn btn-success btn-sm no-print btn-block pos-express-btn pos-express-finalize pos-validar pull-right"><i
+                                    class="btn btn-success btn-sm no-print btn-block pos-express-btn pos-express-finalize pos-validar "><i
                                         class="icon-printer"></i> Generar Ticket</button>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                 <b>Total A Pagar:</b>
                                 <input type="hidden" name="final_total" id="final_total_input" value=0>
                                 <span id="total_payable" class="text-success lead text-bold">0</span>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
-                                <button type="button" class="btn btn-danger btn-sm no-print pull-right" id="pos-cancel"><i
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-danger btn-sm no-print " id="pos-cancel"><i
                                         class="fa fa-close"></i> Cancelar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- Row ends -->
+        <!-- Row starts -->
+       
         <!-- Row ends -->
         {{-- modal --}}
        

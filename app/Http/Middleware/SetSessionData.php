@@ -87,6 +87,8 @@ class SetSessionData
                 'useVentaAgrupada' => $user->useVentaAgrupada,
                 'useTicketImagen' => $user->useTicketImagen,
                 'useTraslado' => $user->useTraslado,
+                'usePermiteLimite' => $user->usePermiteLimite,
+                'useLimiteNumeros' => $user->useLimiteNumeros,
             ];
         
             $request->session()->put('empresa', $empresa_data);

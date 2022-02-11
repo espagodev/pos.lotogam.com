@@ -52,13 +52,15 @@ $(document).ready(function () {
                 .get();
             var numero = $("input[name=tid_apuesta]").val();
             var valor = $("input[name=tid_valor]").val();
+            var row_count_quiniela = $("input#quiniela_row_count").val();
 
             __validarLoteriaSelecconada(
                 bancas_id,
                 users_id,
                 loterias_id,
                 numero,
-                valor
+                valor,
+                row_count_quiniela
             );
         }
     });
@@ -71,6 +73,7 @@ $(document).ready(function () {
         var valor = $("input[name=tid_valor]").val();
         var bancas_id = $("input#bancas_id").val();
         var users_id = $("input#users_id").val();
+        var row_count_quiniela = $("input#quiniela_row_count").val();
         var loterias_id = $("input[name='lot_id[]']:checked")
                 .map(function () {
                     return this.value;
@@ -85,6 +88,7 @@ $(document).ready(function () {
                     method: "get",
                     dataType: "json",
                     data: {
+                        row_count_quiniela: row_count_quiniela,
                         tid_apuesta: numero,
                         tid_valor: valor,
                         bancas_id: bancas_id,
@@ -111,6 +115,11 @@ $(document).ready(function () {
                 if (result.status == "LimiteSuperado") {
                     $("input[name=tid_valor]").focus();
                     toastr.warning(result.mensaje);
+                }
+                if (result.status == "limiteLoteria") {
+                    $("input[name=tid_valor]").focus();
+                    $("input[name=tid_apuesta]").val("");
+                    toastr.error(result.mensaje);
                 }
                 if (result.status == "Comision") {
                     $("input[name=tid_valor]").focus();
@@ -290,6 +299,7 @@ $(document).ready(function () {
                 .get();
 
             var product_row = $("input#product_row_count").val();
+            var row_count_quiniela = $("input#quiniela_row_count").val();
             var promocion = $("input[name='tic_promocion']:checked").val();
             var agrupado = $("input[name='tic_agrupado']:checked").val();
             var tic_fecha_sorteo = $("input#tic_fecha_sorteo").val();
@@ -315,6 +325,7 @@ $(document).ready(function () {
                 url: url,
                 data: {
                     product_row: product_row,
+                    row_count_quiniela: row_count_quiniela,
                     _token: token,
                     loterias_id: loterias,
                     tic_promocion: promocion,
@@ -410,6 +421,7 @@ $(document).on('click', '.validar_jugada_loteria', function(){
     var loterias_id = $(this).attr("data-loterias_id");
     var lot_superpale = $(this).attr("data-superpale");
     var product_row = $("input#product_row_count").val()
+    var row_count_quiniela = $("input#quiniela_row_count").val();
 
 
     if (product_row >= 1) {
@@ -420,7 +432,8 @@ $(document).on('click', '.validar_jugada_loteria', function(){
             dataType: 'json',
             data: {              
                 loteriaId: loterias_id,
-                lotSuperpale: lot_superpale
+                lotSuperpale: lot_superpale,
+                count_quiniela: row_count_quiniela,
             },
             success: function (result) {
                
@@ -517,7 +530,7 @@ function MostrarJugadas() {
             $("table#pos_table tbody").html(result.ticketDetalles);
 
             $("input#product_row_count").val(result.row_count);
-
+            $("input#quiniela_row_count").val(result.row_count_quiniela);
             $("span.total_quantity").each(function () {
                 $(this).html(__number_f(result.row_count));
             });
@@ -576,7 +589,8 @@ function __validarLoteriaSelecconada(
     users_id,
     loterias_id,
     numero,
-    valor
+    valor,
+    row_count_quiniela
 ) {
     $.when(
         $.ajax({
@@ -589,6 +603,7 @@ function __validarLoteriaSelecconada(
                 loterias_id: loterias_id,
                 tid_apuesta: numero,
                 tid_valor: valor,
+                count_quiniela: row_count_quiniela
             },
         })
     ).then(function (result) {
