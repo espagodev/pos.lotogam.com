@@ -120,6 +120,36 @@ $(document).ready(function () {
             __currency_convert_recursively($("#listado_resultados"));
         },
     });
+
+    //IMPRIMIR RESULTADOS
+    $(document).on("click", ".imprimir-resultado", function (e) {
+        e.preventDefault();
+        var container = $(".view_resultados_modal");
+      
+        var start = $('#reportrange')
+        .data('daterangepicker')
+        .startDate.format('YYYY-MM-DD');
+        var end = $('#reportrange')
+            .data('daterangepicker')
+            .endDate.format('YYYY-MM-DD');
+        var  loterias_id = $("select#loterias_id").val();
+
+        var data = { start_date: start, end_date: end, loterias_id: loterias_id };
+
+        $.ajax({
+            url: $(this).data("href"),
+            dataType: 'html',
+            data: data,
+           
+            success: function (result) {
+                
+               
+                container.html(result).modal("show");
+                
+              
+            },
+        });
+    });
 });
 
 $(document).on("click", "button.delete_resultado_button", function () {
@@ -263,3 +293,4 @@ function fn_saltar(pre_premio, orden) {
     else if (orden == 2 && pre_premio.value.length == 2)
         $("#res_premio3").focus();
 }
+

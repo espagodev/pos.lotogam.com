@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<section class="content no-print">
     @include('resultados.partials.pageHeader')
     <div class="row gutters">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -43,7 +44,10 @@
             </div>
         </div>
     </div>
+</section>
 @endsection
+ <!-- Esto se imprimirá-->
+
 @section('scripts')
     <script src="{{ asset('js/app/resultados.js?v=' . $asset_v) }}"></script>
 @endsection

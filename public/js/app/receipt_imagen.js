@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $(function() {
         $(".btnGenerarCopia").click(function() {   
-            console.log('aqui');
+
             html2canvas(document.getElementById('receipt_imagen')).then(function(canvas) {
                 // document.body.appendChild(canvas);
                 var a = document.createElement('a');

@@ -7,7 +7,7 @@
 
     <ul class="app-actions chat-actions">
         <li>
-            <a href="#" data-href="">
+            <a  href="#" data-href="{{ route('getImprimirResultados') }}" class="btn-modal imprimir-resultado">
                 <i class="icon-printer"></i>
             </a>
         </li>

@@ -80,6 +80,8 @@ Route::middleware(['SetSessionData','auth'])->group(function () {
     Route::get('resultados/getValidaHoraCierre', [ResultadoController::class, 'getValidaHoraCierre'])->name('getValidaHoraCierre');
     Route::get('resultados/getGuardarResultados', [ResultadoController::class, 'getGuardarResultados'])->name('getGuardarResultados');
     Route::get('resultados/getResultadosDelete/{resultado}', [ResultadoController::class, 'getResultadosDelete'])->name('getResultadosDelete');
+    Route::get('resultados/getImprimirResultados', [ResultadoController::class, 'getImprimirResultados'])->name('getImprimirResultados');
+    Route::get('resultados/imprimirResultados/{start_date?}/{end_date?}/{loterias_id?}', [ResultadoController::class, 'imprimirResultados'])->name('imprimirResultados');
     
     /**
      * REPORTES

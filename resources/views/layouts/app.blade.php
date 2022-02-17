@@ -35,7 +35,7 @@
     <!-- Loading ends -->
 
     <!-- Page wrapper start -->
-    <div class="page-wrapper">
+    <div class="page-wrapper no-print">
 
         <!-- Sidebar wrapper start -->
         {{-- @include('layouts.partials.sidebar') --}}
@@ -75,6 +75,11 @@
     </div>
     <div class="modal fade view_ticket_modal no-print" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel">
     </div>
+    <div class="modal fade view_resultados_modal no-print" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel">
+    </div>
+     <!-- Esto se imprimirá-->
+ <section class="invoice print_section" id="receipt_section">
+</section>
     @include('layouts.partials.script')
     
 </body>

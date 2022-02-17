@@ -235,12 +235,22 @@ class PosService
         return $this->makeRequest('GET', "getListadoControlApuesta", $data);
     }
 
+    
+
      /**
      * LISTADO RESULTADOS
      */
     public function getListadoResultados($data)
     {
         return $this->makeRequest('GET', "getListadoResultados", $data);
+    }
+
+    /**
+     * LISTADO RESULTADOS IMPRIMIR
+     */
+    public function getImprimirResultados($data)
+    {
+        return $this->makeRequest('GET', "getImprimirResultados", $data);
     }
     
     /**
