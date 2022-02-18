@@ -11,6 +11,11 @@
                 <i class="icon-printer"></i>
             </a>
         </li>
+        {{-- <li>
+            <a  href="#" data-href="{{ route('getImprimirResultados') }}" class="btn-modal imprimir-resultado-directo">
+                <i class="icon-file-text"></i>
+            </a>
+        </li>       --}}
         <li>
             <a  href="#" data-href="{{ route('getNuevoResultado') }}" class="btn-modal nuevo-resultado">
                 <i class="icon-plus-square"></i>

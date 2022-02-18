@@ -240,6 +240,38 @@ $(document).ready(function () {
                 }
             });
     });
+
+     //pagar premio
+     $(document).on('click', '.pagarPremio', function(e) {
+
+        var tickets_id = $('#tickets_id').val();
+        var pin = $('#tic_pin').val();
+        var premio = $('#tic_ganado').val();
+
+        var data = { tickets_id: tickets_id, pin: pin, premio: premio };
+
+        $(this).prop("disabled", true);
+        $(this).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+          );
+
+            $.ajax({
+                method: 'GET',
+                url: $(this).data('href'),
+
+                dataType: 'json',
+                data: data,
+                success: function(result) {
+                     if (result.success === true) {
+                            $('div.view_ticket_modal').modal('hide');
+                            // $('div.view_register').modal('hide');
+                            toastr.success(result.msg);                           
+                        } else {
+                            toastr.error(result.msg);                            
+                        }
+                }
+            });
+    });
     
     // Textarea characters left
     $(function() {

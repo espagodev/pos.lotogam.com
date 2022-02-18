@@ -41,11 +41,15 @@ class TicketController extends Controller
                 ->editColumn('tic_apostado', function ($row) {
                     if ($row->tic_promocion == 1) {
                         $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
-                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . '</span><h5<span class="badge badge-info m-1">** Promocion **</span></h5>';
+                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . ' </span><h6><span class="badge badge-info"><i class="icon-local_play" data-toggle="tooltip" data-placement="right" title="** Promociòn **"></i></span></h6>';
+
+                    }if ($row->tic_sorteo_futuro == 1) {
+                        $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
+                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . ' </span><h6><span class="badge badge-success"><i class="icon-stars" data-toggle="tooltip" data-placement="right" title="** Futuro **"></i></span></h6>';
 
                     } else {
                         $tic_apostado = $row->tic_apostado ? $row->tic_apostado : 0;
-                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . '</span>';
+                        return '<span class="display_currency" data-orig-value="' . $tic_apostado . '" data-currency_symbol = true>' . $tic_apostado . ' </span>';
                     }
                 })
                
