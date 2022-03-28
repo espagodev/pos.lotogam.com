@@ -189,7 +189,12 @@ $(document).ready(function () {
 
     $("button.pos-generar").click(function() {
   
-        
+        $('.pos-generar').prop("disabled", true);
+        $('.pos-express-finalize').prop("disabled", true);
+        $('.pos-cancel').prop("disabled", true);
+        $(".procesando").css("display", "block");
+
+          
         var price_total = 0;
         var total_payable = 0;
 
@@ -274,7 +279,11 @@ $(document).ready(function () {
                 $("input[name='tic_agrupado']").each(function() {
                     this.checked = false;
                 });
-                // enable_pos_form_actions();
+               
+                $('.pos-generar').prop("disabled", false);
+                $('.pos-express-finalize').prop("disabled", false);
+                $('.pos-cancel').prop("disabled", false);
+                $(".procesando").css("display", "none");
             }
         });
         $("input[name=tid_valor]").focus();
@@ -284,8 +293,15 @@ $(document).ready(function () {
     pos_form_obj.validate({
         submitHandler: function(form) {         
            
+            $('.pos-generar').prop("disabled", true);
+            $('.pos-express-finalize').prop("disabled", true);
+            $('.pos-cancel').prop("disabled", true);
+            $(".procesando").css("display", "block");
+
+            
             var price_total = 0;
             var total_payable = 0;
+          
 
             $("table#pos_table tbody tr").each(function () {
                 price_total =
@@ -317,8 +333,7 @@ $(document).ready(function () {
            
             var url = $(form).attr("action");
 
-            $('.pos-generar').prop("disabled", true);
-            $('.pos-express-finalize').prop("disabled", true);
+          
 
             $.ajax({
                 method: "get",
@@ -369,7 +384,9 @@ $(document).ready(function () {
                         this.checked = false;
                     });
                     $('.pos-generar').prop("disabled", false);
-                    $('.pos-express-finalize').prop("disabled", false);
+                $('.pos-express-finalize').prop("disabled", false);
+                $('.pos-cancel').prop("disabled", false);
+                $(".procesando").css("display", "none");
                 }
             });
 

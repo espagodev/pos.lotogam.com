@@ -168,8 +168,36 @@
                                 <span id="total_payable" class="text-success lead text-bold">0</span>
                             </div>
                             <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                                <button type="button" class="btn btn-danger btn-sm no-print " id="pos-cancel"><i
+                                <button type="button" class="btn btn-danger btn-sm no-print pos-cancel" id="pos-cancel"><i
                                         class="fa fa-close"></i> Cancelar</button>
+                            </div>
+                        </div>
+                        <div class="row gutters no-print procesando" style="display: none;">
+                            <div class="text-center">
+                                <div class="spinner-grow text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-secondary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-success" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-danger" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-warning" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-info" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-dark" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
                         </div>
                     </div>
