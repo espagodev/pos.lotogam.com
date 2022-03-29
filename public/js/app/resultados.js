@@ -200,6 +200,8 @@ function validar_loteria() {
         ).then(function (resp) {
             if (resp.status == "resultados") {
                 $("input[name=res_fecha]").focus();
+                $(".numerosPremiados").hide();
+                $(".guardarResultados").hide();
                 toastr.warning(resp.mensaje);
             } else if (resp.status == "cierre") {
                 $(".numerosPremiados").hide();
