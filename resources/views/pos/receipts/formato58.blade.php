@@ -16,12 +16,12 @@
 
             @if (!empty($ticket->logo_base))
                 <div class="centered margin-bottom">
-                    <img src="data:image/png;base64,{{ $ticket->logo_base }}">
+                    <img style="max-height: 100px; width: auto;" src="data:image/png;base64,{{ $ticket->logo_base }}">
                 </div>
             @endif
             @if (!empty($ticket->logo))
                 <div class="centered margin-bottom">
-                    <img src="{{ $ticket->logo }}" alt="Logo">
+                    <img style="max-height: 100px; width: auto;" src="{{ $ticket->logo }}" alt="Logo">
                 </div>
             @endif
             <div class="text-box">
@@ -63,18 +63,19 @@
                 </div>
             @endif
             <br>
-            <div class="flex-box">
+            <div class="flex-box fecha">
 
                 <p class="f-left"><strong>{!! $ticket->date_label !!} {{ $ticket->invoice_date }}</strong></p>
                 <p class="f-left"><strong>{!! $ticket->time_label !!} {{ $ticket->time_date }}</strong></p>
 
             </div>
             @if (!empty($ticket->sorteo_label))
-                <div class="flex-box">
-                    <p class="f-left"><strong>{!! $ticket->sorteo_label !!} {{ $ticket->sorteo_date }}</strong></p>
+                <div class="flex-box fecha">
+                    <p class="f-left "><strong>{!! $ticket->sorteo_label !!} {{ $ticket->sorteo_date }}</strong></p>
+                    <p class="f-left "><strong></strong></p>
                 </div>
             @endif
-            <div class="flex-box">
+            <div class="flex-box ticket_pin">
 
                 <p class="f-left"><strong>{!! $ticket->invoice_no_prefix !!} {{ $ticket->invoice_no }}</strong></p>
 

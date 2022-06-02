@@ -15,12 +15,12 @@
 
         @if (!empty($detalle_ticket->logo_base))
             <div class="centered margin-bottom">              
-                <img src="data:image/png;base64,{{ $detalle_ticket->logo_base }}">
+                <img style="max-height: 100px; width: auto;" src="data:image/png;base64,{{ $detalle_ticket->logo_base }}">
             </div>
         @endif
         @if (!empty($detalle_ticket->logo))
         <div class="centered margin-bottom">
-            <img  src="{{$detalle_ticket->logo}}" alt="Logo">
+            <img style="max-height: 100px; width: auto;"  src="{{$detalle_ticket->logo}}" alt="Logo">
         </div>
     @endif
         <div class="text-box">
@@ -67,19 +67,18 @@
                     <p><strong>******* ***** *******</strong></p>
                 </div>
             @endif
-            <div class="flex-box">
+            <div class="flex-box fecha">
 
                 <p class="f-left"><strong>{!! $detalle_ticket->date_label !!} {{ $detalle_ticket->invoice_date }}</strong></p>
-                {{-- <p class="f-right"><strong>{{ $detalle_ticket->invoice_date }}</strong></p> --}}
 
                 <p class="f-left"><strong>{!! $detalle_ticket->time_label !!} {{ $detalle_ticket->time_date }}</strong></p>
-                {{-- <p class="f-right"><strong>{{ $detalle_ticket->time_date }}</strong></p> --}}
 
             </div>
             @if (!empty($detalle_ticket->sorteo_label))
-                <div class="flex-box">
+                <div class="flex-box fecha">
                     <p class="f-left"><strong>{!! $detalle_ticket->sorteo_label !!} {{ $detalle_ticket->sorteo_date }}</strong></p>
-                    {{-- <p class="f-right"><strong>{{ $detalle_ticket->sorteo_date }}</strong></p> --}}
+                    <p class="f-left"><strong></strong></p>
+
                 </div>
             @endif
     <div class='textbox-info border-top'>

@@ -15,12 +15,12 @@
 
         @if (!empty($detalle_ticket->logo_base))
             <div class="centered margin-bottom">              
-                <img src="data:image/png;base64,{{ $detalle_ticket->logo_base }}">
+                <img style="max-height: 100px; width: auto;" src="data:image/png;base64,{{ $detalle_ticket->logo_base }}">
             </div>
         @endif
         @if (!empty($detalle_ticket->logo))
         <div class="centered margin-bottom">
-            <img  src="{{$detalle_ticket->logo}}" alt="Logo">
+            <img style="max-height: 100px; width: auto;"  src="{{$detalle_ticket->logo}}" alt="Logo">
         </div>
     @endif
         <p class="centered">
