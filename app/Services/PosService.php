@@ -138,6 +138,7 @@ class PosService
     //VALIDAR JUGADAS AL MOMENTO DE SELECIONAR LOTERIAS
     public function getvalidarLoteriaIndividual($data)
     {
+
         return $this->makeRequest('get', "getvalidarLoteriaIndividual",$data);
     }
 

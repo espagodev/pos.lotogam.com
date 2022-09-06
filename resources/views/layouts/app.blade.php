@@ -73,7 +73,7 @@
     <div class="modal fade view_register no-print" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
         aria-hidden="true">
     </div>
-    <div class="modal fade view_ticket_modal no-print" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel">
+    <div class="modal fade view_ticket_modal no-print" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel"  aria-hidden="true">
     </div>
     <div class="modal fade view_resultados_modal no-print" tabindex="-1" role="dialog"  aria-labelledby="myLargeModalLabel">
     </div>

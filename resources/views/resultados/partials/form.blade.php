@@ -21,7 +21,7 @@
                  <select class="custom-select" name="loterias_cierre_id" class="loterias_cierre_id" id="loterias_cierre_id">
                     <option value="">Seleccione La Loteria</option>
                     @foreach($loterias as  $loteria)
-                            <option value="{{ $loteria->loterias_id }}"  >{{ $loteria->lot_nombre}}</option>
+                            <option value="{{ $loteria->loterias_id }}"  >{{ $loteria->lot_nombre}} - ({{ $loteria->hlo_hora_fin }})</option>
                         @endforeach
                 </select> 
             </div>

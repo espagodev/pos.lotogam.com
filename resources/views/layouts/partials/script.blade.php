@@ -38,7 +38,7 @@
 
     $emp_ajustes_comunes = !empty(session('empresa.emp_ajustes_comunes')) ? session('empresa.emp_ajustes_comunes') : [];
 
-    $datos_pagina_predeterminado = !empty($emp_ajustes_comunes['datos_pagina_predeterminado']) ? $emp_ajustes_comunes['datos_pagina_predeterminado'] : 25;
+    $datos_pagina_predeterminado = !empty($emp_ajustes_comunes['datos_pagina_predeterminado']) ? $emp_ajustes_comunes['datos_pagina_predeterminado'] : 50;
 
     $datos_tipo_impresora = session('banca.impresora');
     

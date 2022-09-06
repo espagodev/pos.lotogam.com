@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\Horario;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +13,11 @@ class ResultadoController extends Controller
     {       
         $data['empresas_id'] = session()->get('user.emp_id');
         $data['lot_superpale'] = 0;
-
+        $data['horario'] = session()->get('user.userHorario');
+        $data['users_id'] = session()->get('user.id');        
+        $data['bancas_id'] = session()->get('user.banca');
+        $data['dia'] = Horario::dia();
+   
         $loterias = $this->posService->getLoterias($data);
         return view('resultados.index')->with(['loterias' => $loterias]);
     }
@@ -56,7 +61,11 @@ class ResultadoController extends Controller
     {
         $data['empresas_id'] = session()->get('user.emp_id');
         $data['lot_superpale'] = 0;
-
+        $data['horario'] = session()->get('user.userHorario');
+        $data['users_id'] = session()->get('user.id');        
+        $data['bancas_id'] = session()->get('user.banca');
+        $data['dia'] = Horario::dia();
+   
         $loterias = $this->posService->getLoterias($data);
         return view('resultados.modal.modal_nuevo_resultado')->with(['loterias' => $loterias]);
 
